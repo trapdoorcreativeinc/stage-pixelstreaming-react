@@ -1,0 +1,109 @@
+
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons ExtraLight.otf');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Light.otf');
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Thin.otf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Regular.otf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Medium.otf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Bold.otf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons DemiBold.otf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons ExtraBold.otf');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Black.otf');
+  font-weight: 900;
+}
+// Italic fonts
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons ExtraLight Italic.otf');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Light Italic.otf');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Thin Italic.otf');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Italic.otf');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Medium Italic.otf');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons Bold Italic.otf');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./assets/fonts/TT Commons DemiBold Italic.otf');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons'; 
+  src: url('./assets/fonts/TT Commons ExtraBold Italic.otf');
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Commons'; 
+  src: url('./assets/fonts/TT Commons Black Italic.otf');
+  font-weight: 900;
+  font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+  font-family: 'TT Commons', 'Open Sans', 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  strong {
+    font-weight: 500;
+  }
+}
