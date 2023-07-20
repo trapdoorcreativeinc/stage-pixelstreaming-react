@@ -1,4 +1,5 @@
 import React, { ReactHTMLElement, ReactNode, useCallback } from 'react';
+import AccountSettings from './settings/AccountSettings';
 
 enum SideNavViews {
   ACCOUNT,
@@ -7,14 +8,21 @@ enum SideNavViews {
 
 }
 
-const SideNav = () => {
+
+const SideNav = ({
+
+}) => {
   const [selectedView, setSelectedView] = React.useState<SideNavViews | null>(null);
 
   const contentView = useCallback(() => {
     console.log('selectedView Changed')
     switch(selectedView) {
       case SideNavViews.ACCOUNT:
-        return <div className="side-nav__content__account">Account</div>
+        return (
+          <AccountSettings
+            // pixelStreamingInstance={pixelStreaming}
+          />
+        )
       default:
         return <></>
     }
@@ -53,7 +61,12 @@ const SideNav = () => {
         {contentView()}
       </div>
       <div className="side-nav__buttons">
-        {buttons()}
+        <div className='side-nav__buttons__top'>
+          {buttons()}
+        </div>
+        <div className='side-nav__buttons__bottom'>
+          <img className='side-nav__buttons__logo' src={require('../assets/images/StageIcon.svg')} />
+        </div>
       </div>
     </div>
   )

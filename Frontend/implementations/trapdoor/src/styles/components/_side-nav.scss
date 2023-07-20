@@ -12,6 +12,9 @@
     width: 20em;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: white;
     &.hidden {
       width: 0;
     }
@@ -20,6 +23,9 @@
 
 .side-nav__buttons {
   border-left: #666666 solid 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .side-nav__button {
@@ -39,5 +45,7 @@
     color: #ffffff;
     background-color: #111111;
   }
-
+}
+.side-nav__buttons__bottom {
+  padding: .125rem .25rem;
 }

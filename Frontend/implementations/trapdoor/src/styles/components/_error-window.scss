@@ -1,0 +1,44 @@
+.error-window-wrapper {
+  z-index: 10000;
+  position:fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.75);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+
+  .error-window-content {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: .25rem;
+    max-width: 90%;
+    width: 32rem;
+    color: #black;
+
+    button {
+      font-size: 16pt;
+      padding: .25em .5em;
+      border: none;
+      background-color: #ccccff;
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover {
+        background-color: #b2b2f2;
+      }
+    }
+
+    h1, h2, h3, h4, h5 {
+      margin-top: 0;
+      margin-bottom: .25em;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: .5em;
+    }
+  }
+}

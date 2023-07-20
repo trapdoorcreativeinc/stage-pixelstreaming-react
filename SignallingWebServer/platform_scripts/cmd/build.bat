@@ -21,8 +21,8 @@ if exist nexe\ (
 
   @Rem npm init and install nexe
   pushd nexe
-  call ..\node\npm init -y
-  call ..\node\npm install nexe --save
+  call npm init -y
+  call npm install nexe --save
   popd
 )
 

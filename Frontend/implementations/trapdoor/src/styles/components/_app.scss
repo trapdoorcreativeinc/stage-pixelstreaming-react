@@ -7,3 +7,70 @@
   align-items: center;
   overflow: hidden;
 }
+
+.session-selection {
+  flex: 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.session-selection__video {
+  width: fit-content !important;
+  height: fit-content !important;
+  max-height: 100vh;
+  max-width: 100vw;
+  #streamingVideo {
+    position: static !important;
+    height: fit-content !important;
+    max-height: 100vh;
+    max-width: 100%;
+    width: fit-content !important;
+    box-shadow: 0 0 10px 10px #222222;
+  }
+}
+
+.session-selection__prompt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #222222;
+
+  .session-selection__prompt__header {
+    display: flex;
+    flex-direction: column;
+    border-right: #cccccc 1px solid;
+    width: 14rem;
+    padding: 0 1rem;
+  }
+
+  .session-selection__prompt__navigation {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    margin: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: .5rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+  }
+}
+
+.trapdoor-logo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 10rem;
+  padding: .5rem 1rem;
+  pointer-events: none;
+}
