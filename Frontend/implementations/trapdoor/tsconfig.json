@@ -13,4 +13,11 @@
   },
   "lib": ["es2015"],
   "include": ["./src/*.tsx"],
+  "types": [
+    "webpack-env",
+    "node"
+  ],
+  "typeRoots": [
+    "./node_modules/@types"
+  ]
 }

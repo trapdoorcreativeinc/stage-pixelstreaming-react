@@ -3,7 +3,7 @@
 .side-nav {
   flex: 0 0;
   width: fit-content;
-  border-left: #666666 solid 1px;
+  box-shadow: #111 0 0 5px 1px;
   height: 100%;
   background-color: #1a1a1a;
   display: flex;
@@ -15,14 +15,17 @@
     display: flex;
     flex-direction: column;
     color: white;
+    border-right: #666666 solid 1px;
     &.hidden {
+      border-right: #66666600 solid 1px;
       width: 0;
     }
   }
 }
 
 .side-nav__buttons {
-  border-left: #666666 solid 1px;
+  // border-left: #666666 solid 1px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;

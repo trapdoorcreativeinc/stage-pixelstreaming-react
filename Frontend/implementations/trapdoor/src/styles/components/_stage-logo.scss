@@ -1,0 +1,117 @@
+.stage-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: inherit;
+  width: fit-content;
+  text-align: center;
+  &.horizontal {
+    flex-direction: row;
+    .stage-logo-spinner {
+      width: 1em;
+      height: 1em;
+      margin: 0 .3em 0 0;
+      .stage-logo-circle-background {
+        border-width: .09em;
+      }
+      .stage-logo-circle-foreground {
+        border-width: .09em;
+      }
+      .stage-logo-inner-shape {
+        border-width: .1em;
+      }
+      &.loading {
+        .stage-logo-circle-foreground {
+          div {
+            border-width: .09em;
+          }
+        }
+      }
+    }
+  }
+}
+.stage-logo-text {
+  font-weight: 700;
+  font-feature-settings: 'salt';
+  font-size: 1em;
+}
+
+.stage-logo-spinner {
+  position: relative;
+  width: 3em;
+  height: 3em;
+  border-radius: 6em;
+
+  .stage-logo-circle-background {
+    // width: 2.895em;
+    // height: 2.895em;
+    // top: .0525em;
+    // left: .0525em;
+    // border: .21em solid #999999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: .27em solid #999999;
+    border-radius: inherit;
+    position: absolute;
+    background-color: black;
+
+  }
+  .stage-logo-circle-foreground {
+    border: .27em solid white;
+    transition: all .3s ease-in-out;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: relative;
+    border-radius: inherit;
+  }
+  .stage-logo-inner-shape {
+    width: 60%;
+    height: 20%;
+    border: .3em solid white;
+    border-bottom: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  &.loading {
+    .stage-logo-circle-foreground {
+      border: none;
+      div {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: .27em solid #ffffff;
+        border-radius: inherit;
+        animation: rotate-spinner 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #ffffff transparent transparent transparent;
+        &:nth-child(1) {
+          animation-delay: -0.45s;
+        }
+        &:nth-child(2) {
+          animation-delay: -0.3s;
+        }
+        &:nth-child(3) {
+          animation-delay: -0.15s;
+        }
+  
+      }
+    }
+  }
+}
+
+@keyframes rotate-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

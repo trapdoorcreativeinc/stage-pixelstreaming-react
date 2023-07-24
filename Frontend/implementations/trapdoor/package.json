@@ -13,6 +13,7 @@
     "build-dev-all": "npm link ../../library && cd ../../library && npm run build-dev && cd ../implementations/trapdoor && npm run build-dev"
   },
   "devDependencies": {
+    "@types/node": "^20.4.4",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "css-loader": "^6.7.4",
@@ -31,6 +32,8 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@epicgames-ps/lib-pixelstreamingfrontend-ue5.2": "^0.5.3",
+    "@types/webpack-env": "^1.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
