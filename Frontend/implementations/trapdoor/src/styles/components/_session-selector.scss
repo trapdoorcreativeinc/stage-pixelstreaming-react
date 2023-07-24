@@ -94,4 +94,19 @@
       }
     }
   }
+
+  &.split-half {
+    justify-content: center;
+    .session-selector-left {
+      flex: 0 1 auto;
+      width: auto;
+      .session-selector__header {
+        border-right: solid 1px white;
+        padding-right: 4rem;
+      }
+    }
+    .session-selector-right {
+      flex: 0 1 auto;
+    }
+  }
 }
