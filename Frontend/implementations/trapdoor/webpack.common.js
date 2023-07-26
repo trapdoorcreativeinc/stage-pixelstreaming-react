@@ -56,6 +56,7 @@ module.exports = {
       extensions: ['.tsx', '.ts', '.js', '.svg', '.json'],
     },
     output: {
+      publicPath: '/',
       filename: '[name].js',
       library: 'epicgames-react-frontend',
       libraryTarget: 'umd',

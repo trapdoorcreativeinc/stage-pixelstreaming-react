@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import Switch from './routes';
 import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 
 document.body.onload = function () {
     // Attach the React app root component to document.body
@@ -11,7 +12,9 @@ document.body.onload = function () {
     const root = createRoot(document.getElementById('root'));
     root.render( 
       <BrowserRouter basename='/stream'>
-        <Switch />
+        <MainLayout>
+          <Switch />
+        </MainLayout>
       </BrowserRouter>
     );
 };

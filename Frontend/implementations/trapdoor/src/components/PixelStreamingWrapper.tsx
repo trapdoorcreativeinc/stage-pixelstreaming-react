@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Config,
   AllSettings,
@@ -13,12 +14,10 @@ import ErrorWindow from './ErrorWindow';
 
 export interface PixelStreamingWrapperProps {
   initialSettings?: Partial<AllSettings>;
-  wasDisconnected: Function;
 }
 
 export const PixelStreamingWrapper = ({
   initialSettings,
-  wasDisconnected,
 }: PixelStreamingWrapperProps) => {
   // A reference to parent div element that the Pixel Streaming library attaches into:
   const videoParent = useRef<HTMLDivElement>(null);
@@ -31,6 +30,8 @@ export const PixelStreamingWrapper = ({
 
   const [streamDisconnectModalVisible, setStreamErrorModalVisible] = useState(false);
   const [streamDisconnectModalMessage, setStreamErrorModalMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const [streamRunning, setStreamRunning] = useState(false);
   const [reconnecting, setReconnecting] = useState(false);
@@ -175,7 +176,7 @@ export const PixelStreamingWrapper = ({
           <p>Don't worry! We saved your work before disconnecting. You can find it in the menu under Sessions - Last Session</p>
           <button onClick={() => {
             setStreamErrorModalVisible(false);
-            wasDisconnected();
+            navigate('/');
           }}>Reconnect</button>
         </>
       </ErrorWindow>

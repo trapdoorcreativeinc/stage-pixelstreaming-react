@@ -15,7 +15,6 @@ $large-shape-width: $small-shape-width * 3;
   font-feature-settings: 'salt';
   * {
     font-family: 'TT Commons', 'Studio6', Arial, Helvetica, sans-serif;
-
   }
 
   &.large {
@@ -74,6 +73,7 @@ $large-shape-width: $small-shape-width * 3;
   }
   
   &.dark {
+    color: $primary-dark-color;
     .stage-logo-text {
       color: $primary-dark-color;
     }
@@ -104,6 +104,7 @@ $large-shape-width: $small-shape-width * 3;
     }
   }
   &.light {
+    color: $primary-light-color;
     .stage-logo-text {
       color: $primary-light-color;
     }

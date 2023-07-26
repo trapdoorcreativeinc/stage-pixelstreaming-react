@@ -29,7 +29,6 @@ const App = () => {
             StartVideoMuted: true,
             HoveringMouse: true,
           }}
-          wasDisconnected={wasDisconnected}
         />
       )}
       <SideNav />

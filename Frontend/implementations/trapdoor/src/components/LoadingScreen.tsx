@@ -216,7 +216,7 @@ const LoadingScreen = ({
   }, [])
 
   return (
-    <>
+    <div className='loading-screen'>
       {images.map((image, index) => (
         <LazyLoadingImage
           key={`loading-screen-image-${index}`}
@@ -225,7 +225,7 @@ const LoadingScreen = ({
           className={`loading-screen-image ${currentImage === index ? 'active' : ''}`}
         />
       ))}
-    </>
+    </div>
   )
 }
 

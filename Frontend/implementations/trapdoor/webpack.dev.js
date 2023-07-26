@@ -11,12 +11,14 @@ module.exports = merge(common, {
     devServer: {
         port: 3000,
         historyApiFallback: true,
+        hot: true,
+        open: true,
         proxy: {
             '/api': {
                 target: 'http://localhost:3000',
                 router: () => 'http://localhost:5001',
                 logLevel: 'debug'
-            }
+            },
         }
     },
     loader: {

@@ -13,10 +13,15 @@
 @use './styles/components/settings/settings-page-wrapper';
 
 @use './styles/components/afk-warning';
-@use './styles/components/app';
+// @use './styles/components/app';
 @use './styles/components/error-window';
 @use './styles/components/lazy-loading-image';
 @use './styles/components/pixel-streaming-wrapper';
 @use './styles/components/session-selector';
 @use './styles/components/side-nav';
 @use './styles/components/stage-logo';
+
+@use './styles/layouts/main-layout';
+
+@use './styles/pages/landing-page';
+@use './styles/pages/loading-page';

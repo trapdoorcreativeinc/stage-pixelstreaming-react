@@ -34,6 +34,7 @@
 
 
 button, .button {
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,6 +57,7 @@ button, .button {
   &:disabled, &.disabled {
     opacity: 0.5;
     cursor: default;
+    pointer-events: none;
   }
   &.danger {
     @include colorButton($accent-color-1, $primary-light-color);
