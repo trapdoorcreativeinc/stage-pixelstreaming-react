@@ -18,12 +18,20 @@ const SessionSelector = ({
     <div className={`session-selector-wrapper ${!loadingSession && 'split-half'}`}>
       <div className='session-selector-left'>
         <div className='session-selector__header'>
-          <StageLogo includeText={!loadingSession} loading={loadingSession} horizontal={loadingSession} />
-          {loadingSession ? (
-            <div>Stage</div>
-          ): (
-            <div className="sub-text">Streaming</div>
-          )}
+          <StageLogo 
+            includeText={!loadingSession} 
+            loading={loadingSession} 
+            orientation={'vertical'} 
+            logoSize={loadingSession ? 'small' : 'large'}
+            mode='light'
+            checkmark={false}
+          >
+            {loadingSession ? (
+              <div>Stage</div>
+            ): (
+              <div className="sub-text">Streaming</div>
+            )}
+          </StageLogo>
         </div>
         { loadingSession && (
           <div className='session-selector__loading-text'>
@@ -36,7 +44,7 @@ const SessionSelector = ({
       {!loadingSession ? (
           <div className='session-selector__navigation'>
             {/* <input className='session-selector__input' type='text' value={signalingServer} onChange={(e) => setSignalingServer(e.target.value)} /> */}
-            <button className='session-selector__button'
+            <button className='session-selector__button action'
               onClick={() => {
                 setLoadingSession(true);
                 // setShowSessionSelector(false);
@@ -44,10 +52,14 @@ const SessionSelector = ({
             >
               Start Session
             </button>
-            <button className='session-selection__prompt__button'>
+            <button className='session-selection__prompt__button action'
+              onClick={() => {
+                setShowSessionSelector(false);
+              }}
+            >
               Start a Multi User Session
             </button>
-            <button className='session-selection__prompt__button'>
+            <button className='session-selection__prompt__button action'>
               Join a Multi User Session
             </button>
           </div>

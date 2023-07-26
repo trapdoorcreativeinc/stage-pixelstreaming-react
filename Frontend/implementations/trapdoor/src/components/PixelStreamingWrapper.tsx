@@ -43,7 +43,7 @@ export const PixelStreamingWrapper = ({
       // Attach Pixel Streaming library to videoParent element:
       const config = new Config({ initialSettings });
       config.setFlagEnabled(Flags.AFKDetection, true);
-      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 60);
+      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 300);
 
       const streaming = new PixelStreaming(config, {
         videoElementParent: videoParent.current
@@ -112,16 +112,18 @@ export const PixelStreamingWrapper = ({
       })
       streaming.addEventListener('streamerListMessage', (e) => {
         console.log('PixelStreamingWrapper::StreamerListMessageEvent -- Data', e.data);
-        const streamerIdIndex = e.data.messageStreamerList.ids.indexOf("SFU");
-        if (streamerIdIndex > -1) {
+        const streamerId = "DefaultStreamer"
+        const streamerIdIndex = e.data.messageStreamerList.ids.indexOf(streamerId);
+        console.log('PixelStreamingWrapper::StreamerListMessageEvent -- streamerIdIndex', streamerIdIndex)
+        if (streamerIdIndex > -1 && e.data.autoSelectedStreamerId !== streamerId) {
         // if (e.data.messageStreamerList.ids.length > 1) {
-          console.log('PixelStreamingWrapper::StreamerListMessageEvent -- setting StreamerId', "SFU")
-          streaming.config.setSettings({'StreamerId':  "SFU"})
+          console.log('PixelStreamingWrapper::StreamerListMessageEvent -- setting StreamerId', streamerId)
+          streaming.config.setSettings({'StreamerId':  streamerId})
         }
-        else if (e.data.messageStreamerList.ids.length === 1) {
-          console.log('PixelStreamingWrapper::StreamerListMessageEvent -- setting StreamerId', e.data.messageStreamerList.ids[0])
-          streaming.config.setSettings({'StreamerId':  e.data.messageStreamerList.ids[0]})
-        } 
+        // else if (e.data.messageStreamerList.ids.length === 1) {
+        //   console.log('PixelStreamingWrapper::StreamerListMessageEvent -- setting StreamerId', e.data.messageStreamerList.ids[0])
+        //   streaming.config.setSettings({'StreamerId':  e.data.messageStreamerList.ids[0]})
+        // } 
       })
       streaming.addEventListener('latencyTestResult', (e) => {
         console.log('PixelStreamingWrapper::Setup -- LatencyTestResultEvent', e);

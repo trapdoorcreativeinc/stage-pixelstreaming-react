@@ -1,0 +1,14 @@
+.single-file-wrapper {
+  display: flex;
+
+  .single-file__icon {
+
+  }
+  .single-file__information {
+    display: flex;
+    flex-direction: column;
+    .single-file__sub-information {
+      display: flex;
+    }
+  }
+}

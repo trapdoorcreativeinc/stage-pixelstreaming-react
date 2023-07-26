@@ -1,3 +1,5 @@
+@use '../colors' as *;
+
 .error-window-wrapper {
   z-index: 10000;
   position:fixed;
@@ -13,24 +15,12 @@
   padding: 1rem;
 
   .error-window-content {
-    background-color: #ffffff;
+    background-color: $primary-light-color;
     padding: 1rem;
     border-radius: .25rem;
     max-width: 90%;
-    width: 32rem;
-    color: black;
-
-    button {
-      font-size: 16pt;
-      padding: .25em .5em;
-      border: none;
-      background-color: #ccccff;
-      border-radius: 4px;
-      cursor: pointer;
-      &:hover {
-        background-color: #b2b2f2;
-      }
-    }
+    width: 33rem;
+    color: $primary-dark-color;
 
     h1, h2, h3, h4, h5 {
       margin-top: 0;

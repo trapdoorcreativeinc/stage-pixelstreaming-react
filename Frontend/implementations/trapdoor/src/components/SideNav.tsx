@@ -1,5 +1,6 @@
 import React, { ReactHTMLElement, ReactNode, useCallback } from 'react';
 import AccountSettings from './settings/AccountSettings';
+import ModelsPage from './settings/ModelsPage';
 
 enum SideNavViews {
   ACCOUNT,
@@ -22,6 +23,10 @@ const SideNav = ({
           <AccountSettings
             // pixelStreamingInstance={pixelStreaming}
           />
+        )
+      case SideNavViews.MODELS:
+        return (
+          <ModelsPage />
         )
       default:
         return <></>
@@ -49,9 +54,9 @@ const SideNav = ({
       view: SideNavViews.RENDERS
     }]
     return buttonData.map((buttonData, index) => (
-      <button className={`side-nav__button ${selectedView === buttonData.view ? 'selected' : ''}`} onClick={() => toggleSelectedView(buttonData.view)} key={`side-nav-button-${index}`}>
+      <div className={`side-nav__button ${selectedView === buttonData.view ? 'selected' : ''}`} onClick={() => toggleSelectedView(buttonData.view)} key={`side-nav-button-${index}`}>
         <span className={`material-icons`}>{buttonData.icon}</span>
-      </button>
+      </div>
     ))
   }, [selectedView, toggleSelectedView])
 

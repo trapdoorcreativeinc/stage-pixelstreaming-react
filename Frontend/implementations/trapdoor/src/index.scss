@@ -3,6 +3,15 @@
 @use './styles/typography';
 @use './styles/root';
 
+@use './styles/components/file-explorer/file-explorer';
+@use './styles/components/file-explorer/file-uploader';
+@use './styles/components/file-explorer/single-file';
+
+@use './styles/components/forms/button';
+
+
+@use './styles/components/settings/settings-page-wrapper';
+
 @use './styles/components/afk-warning';
 @use './styles/components/app';
 @use './styles/components/error-window';

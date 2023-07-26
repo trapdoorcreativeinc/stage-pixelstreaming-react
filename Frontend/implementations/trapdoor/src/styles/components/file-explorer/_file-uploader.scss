@@ -1,0 +1,104 @@
+.file-uploader-wrapper {
+
+  .file-uploader__input {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 200;
+    gap: 1em;
+    padding-bottom: 1rem;
+    justify-content: center;
+    label {
+      font-weight: inherit;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .25em;
+      cursor: pointer;
+      font-size: inherit;
+      padding: .2em .75em .2em .4em;
+      background-color: #FFD000;
+      color: black;
+      border-radius: 4px;
+      box-shadow: 0 0 4px 0 #111111, 1px 1px 3px 0 #ffffff66, -2px -2px 4px 0 #1a1a1a;
+      &:hover {
+        box-shadow: 0 0 2px 0 #080808, 1px 1px 2px 0 #ffffff33, -1px -1px 2px 0 #00000099;
+      }
+      span {
+        font-size: inherit;
+        font-weight: inherit;
+        padding-bottom: .125em
+      }
+    }
+    input {
+      height: 0;
+      width: 0;
+    }
+  }
+  .file-uploader__files {
+    height: fit-content;
+    max-height: 10rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    font-size: .75rem;
+    background-color: #3a3a3a;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+
+    .file-uploader__file {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5em .5em;
+      border-top: solid 1px #000000;
+
+      &:first-child {
+        border: none;
+      }
+
+      .file-uploader__file__information {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        .file-uploader__file__information__left {
+          flex: 1 1 auto;
+        }
+        .file-uploader__file__information__right {
+          display: flex;
+          align-items: center;
+
+        }
+      }
+      .file-uploader__spinner__logo {
+        margin-left: .25em;
+        font-size: 1.25rem;
+      }
+      .file-uploader__file__name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .file-uploader__file__progress {
+        margin-top: .25rem;
+        display: flex;
+        align-items: center;
+        height: 2px;
+        width: 100%;
+        content: '';
+        background-color: #999999;
+        .file-uploader__file__progress__bar {
+          height: 100%;
+          background-color: #0070ba;
+          content: '';
+          &.completed {
+            background-color: #55ff55;
+          }
+        }
+      }
+    }
+  }
+}

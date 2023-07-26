@@ -1,0 +1,84 @@
+
+@use 'sass:color' as color;
+@use '../../colors' as *;
+
+@mixin normalBoxShadow($color) {
+  box-shadow: 0 0 4px 0 #{$secondary-dark-color}99, 1px 1px 3px 0 #{$color}66, -2px -2px 4px 0 #{$secondary-dark-color}99;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px, color.adjust($color, $blackness: 15%) 0 -3px 0 inset;
+}
+@mixin hoverBoxShadow($color) {
+  &:hover:not(:disabled):not(.disabled) {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, color.adjust($color, $blackness: 10%) 0 -3px 0 inset;
+    transform: translateY(-1px);
+  }
+}
+@mixin focusBoxShadow($color) {
+  &:focus:not(:disabled):not(.disabled) {
+    box-shadow: color.adjust($color, $blackness: 10%) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, color.adjust($color, $blackness: 10%) 0 -3px 0 inset;
+  }
+}
+@mixin activeBoxShadow($color) {
+  &:active:not(:disabled):not(.disabled) {
+    box-shadow: color.adjust($color, $blackness: 10%) 0 3px 7px inset;
+    transform: translateY(1px);
+  }
+}
+@mixin colorButton($background-color, $text-color) {
+  background-color: $background-color;
+  color: $text-color;
+  @include normalBoxShadow($background-color);
+  @include focusBoxShadow($background-color);
+  @include hoverBoxShadow($background-color);
+  @include activeBoxShadow($background-color);
+}
+
+
+button, .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow .15s,transform .15s;
+  margin: .25em;
+  font-size: inherit;
+  font-weight: 300;
+  padding: .3em .5em .2em;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-radius: 4px;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  background-color: $accent-color-4;
+  color: $primary-dark-color;
+  @include colorButton($accent-color-4, $primary-dark-color);
+  &:disabled, &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  &.danger {
+    @include colorButton($accent-color-1, $primary-light-color);
+  }
+  &.warning {
+    @include colorButton($accent-color-5, $primary-dark-color);
+  }
+  &.info {
+    @include colorButton($supplementary-color, $primary-light-color);
+  }
+  &.success {
+    @include colorButton($accent-color-3, $primary-dark-color);
+  }
+  &.action {
+    @include colorButton($cta-color, $primary-dark-color);
+  }
+  &.dark {
+    @include colorButton($primary-dark-color, $primary-light-color);
+  }
+  &.light {
+    @include colorButton($primary-light-color, $primary-dark-color);
+  }
+  &.grey {
+    @include colorButton($secondary-dark-color, $primary-light-color);
+  }
+}

@@ -1,24 +1,31 @@
-
+@use '../colors' as *;
+@use 'sass:color' as color;
 
 .pixel-streaming-wrapper {
+  width: 100%;
+  height: 100%;
   flex: 1 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  position:relative;
 }
 
 .pixel-streaming-wrapper__video {
   width: fit-content !important;
   height: fit-content !important;
   max-height: 100vh;
-  max-width: 100vw;
+  max-width: 98%;
   #streamingVideo {
     position: static !important;
     height: fit-content !important;
     max-height: 100vh;
     max-width: 100%;
     width: fit-content !important;
-    box-shadow: 0 0 10px 10px #222222;
+    min-width: 18rem;
+    min-height: 20rem;
+    background-color: $primary-dark-color;
+    box-shadow: 0 0 10px 10px color.adjust($secondary-dark-color, $lightness: -20%);
   }
 }
 
@@ -32,13 +39,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #222222;
+  z-index: 9;
+  background-color: #{$primary-dark-color}88;
   cursor: pointer;
 
   .pixel-streaming-wrapper__prompt__header {
     display: flex;
     flex-direction: column;
-    border-bottom: #cccccc 1px solid;
+    border-bottom: $primary-light-color 1px solid;
     width: 18rem;
     height: 20rem;
     padding: 1rem;
@@ -54,7 +62,7 @@
     align-items: center;
     font-size: 1.5rem;
     .play-button-header {
-      color: white;
+      color: $secondary-light-color;
       font-weight: 100;
       font-size: 2.5rem;
       margin: .5rem 0;
@@ -66,9 +74,9 @@
       font-size: 5rem;
       justify-content: center;
       align-items: center;
-      color: white;
+      color: $secondary-light-color;
       border-radius: 999rem;
-      background-color: black;
+      background-color: $primary-dark-color;
       .material-icons {
         font-size: 120%;
       }

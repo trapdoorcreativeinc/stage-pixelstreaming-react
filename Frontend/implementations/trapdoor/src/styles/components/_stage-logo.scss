@@ -1,65 +1,158 @@
+@use '../colors' as *;
+@use 'sass:color' as color;
+
+$small-border-width: .09em;
+$small-shape-width: .1em;
+$large-border-width: $small-border-width * 3;
+$large-shape-width: $small-shape-width * 3;
+
 .stage-logo-wrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
   font-size: inherit;
   width: fit-content;
   text-align: center;
-  &.horizontal {
-    flex-direction: row;
+  font-feature-settings: 'salt';
+  * {
+    font-family: 'TT Commons', 'Studio6', Arial, Helvetica, sans-serif;
+
+  }
+
+  &.large {
+    .stage-logo-spinner {
+      width: 3em;
+      height: 3em;
+      border-radius: 6em;
+      .stage-logo-circle-background {
+        border-width: $large-border-width;
+      }
+      .stage-logo-circle-foreground {
+        border-width: $large-border-width;
+      }
+      .stage-logo-inner-shape {
+        border-width: $large-shape-width;
+      }
+    }
+    &.loading {
+      .stage-logo-circle-foreground {
+        div {
+          border-width: $large-border-width;
+        }
+      }
+    }
+  }
+  &.small {
     .stage-logo-spinner {
       width: 1em;
       height: 1em;
+      border-radius: 2em;
       margin: 0 .3em 0 0;
       .stage-logo-circle-background {
-        border-width: .09em;
+        border-width: $small-border-width;
       }
       .stage-logo-circle-foreground {
-        border-width: .09em;
+        border-width: $small-border-width;
       }
       .stage-logo-inner-shape {
-        border-width: .1em;
+        border-width: $small-shape-width;
       }
       &.loading {
         .stage-logo-circle-foreground {
           div {
-            border-width: .09em;
+            border-width: $small-border-width;
           }
         }
+      }
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+  }
+  &.horizontal {
+    flex-direction: row;
+  }
+  
+  &.dark {
+    .stage-logo-text {
+      color: $primary-dark-color;
+    }
+    .stage-logo-circle-background {
+      background-color: $primary-light-color;
+    }
+    .stage-logo-circle-foreground {
+      border-color: $primary-dark-color;
+    }
+    .stage-logo-inner-shape {
+      border-color: $primary-dark-color;
+    }
+    .loading {
+      .stage-logo-circle-foreground {
+        div {
+          border-color: $primary-dark-color transparent transparent transparent;
+        }
+      }
+    }
+    .checkmark {
+      .stage-logo-circle-foreground {
+        border-color: $accent-color-4;
+      }
+      .stage-logo-inner-shape {
+        border-color: $accent-color-4;
+        border-left-color: #{$accent-color-4}00;
+      }
+    }
+  }
+  &.light {
+    .stage-logo-text {
+      color: $primary-light-color;
+    }
+    .stage-logo-circle-background {
+      background-color: $primary-dark-color;
+    }
+    .stage-logo-circle-foreground {
+      border-color: $primary-light-color;
+    }
+    .stage-logo-inner-shape {
+      border-color: $primary-light-color;
+    }
+    .loading {
+      .stage-logo-circle-foreground {
+        div {
+          border-color: $primary-light-color transparent transparent transparent;
+        }
+      }
+    }
+    .checkmark {
+      .stage-logo-circle-foreground {
+        border-color: $accent-color-3;
+      }
+      .stage-logo-inner-shape {
+        border-color: $accent-color-3;
+        border-left-color: #{$accent-color-3}00;
       }
     }
   }
 }
 .stage-logo-text {
   font-weight: 700;
-  font-feature-settings: 'salt';
   font-size: 1em;
 }
 
 .stage-logo-spinner {
   position: relative;
-  width: 3em;
-  height: 3em;
-  border-radius: 6em;
 
   .stage-logo-circle-background {
-    // width: 2.895em;
-    // height: 2.895em;
-    // top: .0525em;
-    // left: .0525em;
-    // border: .21em solid #999999;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    border: .27em solid #999999;
     border-radius: inherit;
     position: absolute;
-    background-color: black;
-
+    border: solid color.adjust($secondary-dark-color, $lightness: 30%);
   }
   .stage-logo-circle-foreground {
-    border: .27em solid white;
+    border: solid;
     transition: all .3s ease-in-out;
     width: 100%;
     height: 100%;
@@ -71,13 +164,12 @@
   .stage-logo-inner-shape {
     width: 60%;
     height: 20%;
-    border: .3em solid white;
+    border: solid;
     border-bottom: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
   }
 
   &.loading {
@@ -88,10 +180,9 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        border: .27em solid #ffffff;
+        border: solid;
         border-radius: inherit;
         animation: rotate-spinner 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #ffffff transparent transparent transparent;
         &:nth-child(1) {
           animation-delay: -0.45s;
         }
@@ -103,6 +194,16 @@
         }
   
       }
+    }
+  }
+  
+
+  &.checkmark {
+    .stage-logo-inner-shape {
+      height:30%;
+      // border-bottom-left-radius: 300px;
+      border-left-width: 0;
+      transform: translate(-50%, -70%) rotate(135deg);
     }
   }
 }
