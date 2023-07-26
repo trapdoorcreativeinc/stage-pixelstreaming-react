@@ -53,12 +53,14 @@ const FileUploader = ({
 }: FileUploaderProperties) => {
   const [filesToUpload, setFilesToUpload] = useState<FileUploaderFile[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
   const fileInputRef = createRef<HTMLInputElement>();
   const folderInputRef = createRef<HTMLInputElement>();
   const dropFileInputRef = createRef<HTMLInputElement>();
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Files changed', e.target.files);
     setUploadStatus('');
     const newFiles = Array<FileUploaderFile>();
     if (e.target.files) {
@@ -70,51 +72,78 @@ const FileUploader = ({
       setFilesToUpload(newFiles);
     }
   }
+  const startDraggingOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingOver(true);
+  }
+  const stopDraggingOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingOver(false);
+  }
 
   return (<>
     <div className={`file-uploader-wrapper ${className}`}>
-      <div className="file-uploader__input">
-        <label className="button action slim">
-          <input type="file" 
-            onChange={onFileInputChange}
-            multiple
-            disabled={uploading}
-            ref={fileInputRef}
-          />
-          <span className="material-icons">upload_file</span>
-          <span>Upload File(s)</span>
-        </label>
-        <label className="button action slim">
-          <input type="file" 
-            onChange={onFileInputChange}
-            directory='true'
-            webkitdirectory='true'
-            mozdirectory='true'
-            multiple
-            disabled={uploading}
-            ref={folderInputRef}
-          />
-          <span className="material-icons">drive_folder_upload</span>
-          <span>Upload Folder</span>
-        </label>
-      </div>
       <div className="file-uploader__status">
         {uploadStatus}
       </div>
       {!uploading && filesToUpload.length === 0 && (
-      <div className='file-uploader__dropzone'>
-        <label>
-          <div className='file-uploader__dropzone__text'>
-            <span className='material-icons'>upload_file</span>
-            <p>Drag and drop files here</p>
-          </div>
-          <input type="file"
-            onChange={onFileInputChange}
-            multiple
-            disabled={uploading}
-            ref={dropFileInputRef}
-          />
-        </label>
+      <div className={`file-uploader__dropzone ${isDraggingOver && 'dragging-over'}`}
+        onDrag={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onDragOver={startDraggingOver}
+        onDragEnter={startDraggingOver}
+        onDragLeave={stopDraggingOver}
+        onDragEnd={stopDraggingOver}
+        onDrop={(e) => {
+          console.log('Dropped', e.dataTransfer.files);
+          stopDraggingOver(e);
+          let length = e.dataTransfer.files.length;
+          const fileList = new DataTransfer();
+          let folderAttempted = false;
+          for (let i = 0; i < length; i++) {
+            const entry = e.dataTransfer.items[i].webkitGetAsEntry();
+            if (entry.isFile) {
+              fileList.items.add(e.dataTransfer.files[i]);
+            } else {
+              folderAttempted = true;
+            }
+          }
+          folderAttempted && alert('It looks like you tried to drag and drop a folder(s). These folders weren\'t uploaded. Please click \'Upload a Folder\' instead.');
+          fileInputRef.current.files = fileList.files;
+          fileInputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
+        }}
+      >
+        <div className='file-uploader__dropzone__text'>
+          <span className='material-icons'>upload_file</span>
+          <p>Drag and drop 
+            <label>
+              <input type="file" 
+                onChange={onFileInputChange}
+                multiple
+                disabled={uploading}
+                ref={fileInputRef}
+              />
+              <span>&nbsp;files here</span>
+            </label>
+            &nbsp;or&nbsp;
+            <label>
+              <input type="file" 
+                onChange={onFileInputChange}
+                directory='true'
+                webkitdirectory='true'
+                mozdirectory='true'
+                multiple
+                disabled={uploading}
+                ref={folderInputRef}
+              />
+              <span>Click here to Upload a Folder</span>
+            </label>
+          </p>
+        </div>
       </div>
       )}
       {filesToUpload.length > 0 && (

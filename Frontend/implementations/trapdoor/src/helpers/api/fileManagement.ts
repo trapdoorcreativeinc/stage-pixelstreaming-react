@@ -1,4 +1,4 @@
-import { authenticatedFormPost, getCSRFTokenCookie } from "../auth";
+import { authenticatedFormPost, getCSRFTokenCookie } from "./auth";
 import axios, { AxiosProgressEvent } from "axios";
 
 
@@ -63,4 +63,27 @@ export const uploadFile = async (
   })
 
   finishedCallback(file);
+}
+
+export const readDirectory = async (parentDirectory: string, userId: string, path: string) => {
+  const data = await fetch (`/api/v1/aws/read-directory/${parentDirectory}/${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFTokenCookie(),
+    },
+    body: JSON.stringify({
+      path,
+      delimiter: "/",
+    }),
+  })
+  .then((data) => {
+    return data.json();
+  })
+  .catch((error) => {
+    console.error("Error reading directory: ", error);
+    return null;
+  });
+  return data;
 }

@@ -1,5 +1,42 @@
+@use '../../colors' as *;
+@use 'sass:color' as color;
+
 .file-explorer-wrapper {
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .file-explorer {
+    border-radius: 4px;
+    overflow: hidden;
+    .file-explorer__header {
+      // background-color: $cta-color;
+      background-color: color.adjust($secondary-dark-color, $lightness: -15%);
+      height: fit-content;
+      width: 100%;
+      font-size: .75rem;
+      padding: .6em .625rem .5em;
+      display: flex;
+      align-items: center;
+      text-shadow: 0 0 2rem $primary-dark-color;
+      div {
+        cursor: pointer;
+        color: $cta-color;
+        // color: $secondary-light-color;
+        // text-decoration: underline;
+        // border-bottom: solid 1px $primary-light-color;
+      }
+      span {
+        margin: .25em;
+        color: $primary-light-color;
+      }
+    }
+  }
   .file-explorer__files {
-    
+    border-radius: 4px;
+    background-color: $secondary-dark-color;
+    overflow: hidden;
   }
 }

@@ -24,29 +24,33 @@ const SingleFile = ({
 }: SingleFileProperties) => {
   return (<>
   <div className="single-file-wrapper">
-    <div className="single-file__icon">
-      <span className="material-icons">
-        {type === 'folder' ? 'folder' : 'insert_drive_file'}
-      </span>
-    </div>
-    <div className="single-file__information">
-      <div className="single-file__name">{name}</div>
-      <div className="single-file__sub-information">
-        <div className="single-file__size">{formatBytes(size)}</div>
-        <div className="single-file__last-modified">{lastModified}</div>
+    <div className="single-file__left">
+      <div className="single-file__icon">
+        <span className={`material-icons ${type}`}>
+          {type === 'folder' ? 'folder' : 'insert_drive_file'}
+        </span>
+      </div>
+      <div className="single-file__information">
+        <div className="single-file__name">{name}</div>
+        <div className="single-file__sub-information">
+          <div className="single-file__size">{formatBytes(size)}</div>
+          <div className="single-file__last-modified">{lastModified}</div>
+        </div>
       </div>
     </div>
-    <div className="single-file__actions">
-      {deletable && (
-        <button className="single-file__delete">
-          <span className="material-icons">delete</span>
-        </button>
-      )}
-      {downloadable && (
-          <span className="material-icons"
-            onClick={onDownload}
-          >file_download</span>
-      )}
+    <div className="single-file__right">
+      <div className="single-file__actions">
+        {deletable && (
+            <span className="material-icons"
+              onClick={onDelete}
+            >delete</span>
+        )}
+        {downloadable && (
+            <span className="material-icons"
+              onClick={onDownload}
+            >file_download</span>
+        )}
+      </div>
     </div>
   </div>
   </>)

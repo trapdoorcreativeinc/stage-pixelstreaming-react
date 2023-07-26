@@ -1,4 +1,4 @@
-import { getCookie } from "."
+import { getCookie } from ".."
 
 export const getCSRFTokenCookie = (): string => {
   return getCookie("XSRF-TOKEN");

@@ -1,36 +1,21 @@
 @use '../../colors' as *;
 
 .file-uploader-wrapper {
+  justify-self: flex-end;
+  flex: 0 0 auto;
 
-  .file-uploader__input {
-    display: flex;
-    font-size: .75rem;
-    font-weight: 200;
-    padding-bottom: 1rem;
-    justify-content: center;
-    label {
-      font-weight: inherit;
-      width: 50%;
-      gap: .25em;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      span {
-        font-size: inherit;
-        font-weight: inherit;
-        padding-bottom: .125em
-      }
-    }
-    input {
-      height: 0;
-      width: 0;
-    }
-  }
   .file-uploader__dropzone {
     width:100%;
-    height: 7rem;
+    min-height: 8rem;
+    min-width: 18rem;
+    height: fit-content;
     // border-radius: 16px;
     // border: 1px dashed $secondary-dark-color;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23#{str-slice(inspect($secondary-dark-color), 2)}' stroke-width='4' stroke-dasharray='6%2c 16' stroke-dashoffset='32' stroke-linecap='square'/%3e%3c/svg%3e");
+    &.dragging-over {
+      
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23#{str-slice(inspect($primary-light-color), 2)}' stroke-width='4' stroke-dasharray='6%2c 16' stroke-dashoffset='32' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
     .file-uploader__dropzone__text {
       height: 100%;
       width: 100%;
@@ -39,8 +24,23 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      white-space: pre-line;
+      padding: 1em;
       p {
+        width: 100%;
+        max-height: 50%;
         margin-bottom: 0;
+        text-align: center;
+        line-height: 1.5em;
+        label {
+          color: $sub-header-color;
+          cursor: pointer;
+        }
+      }
+      .material-icons {
+        font-size: 1.5em;
+        line-height: unset;
+        margin-top: .5rem;
       }
     }
     input {

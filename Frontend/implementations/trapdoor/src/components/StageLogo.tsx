@@ -36,7 +36,9 @@ const StageLogo = ({
       {includeText && (
         <div className='stage-logo-text'>Stage</div>
       )}
-      {children}
+      <div className='stage-logo-subtext'>
+        {children}
+      </div>
     </div>
   )
 }

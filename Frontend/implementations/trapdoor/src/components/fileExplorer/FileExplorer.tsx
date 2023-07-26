@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SingleFile from './SingleFile';
 import FileUploader from './FileUploader';
 
@@ -39,8 +39,32 @@ const FileExplorer = ({
   allowDownloads = false,
   baseBucketPath = 'Models',
 }: FileExplorerProperties) => {
+  const [currentPath, setCurrentPath] = React.useState(baseBucketPath);
+  const [files, setFiles] = React.useState([]);
+  useEffect(() => {
+    
+  }, [])
   return (<>
     <div className="file-explorer-wrapper">
+      <div className="file-explorer">
+        <div className='file-explorer__header'>
+          <div onClick={() => setCurrentPath(baseBucketPath)}>{baseBucketPath}</div>
+          <span>/</span>
+          <div>Test Folder</div>
+        </div>
+        <div className="file-explorer__files">
+          {testFileData.map((file) => (
+            <SingleFile
+              name={file.name}
+              type={file.type}
+              size={file.size}
+              lastModified={file.lastModified}
+              deletable={true}
+              downloadable={false}
+            />
+          ))}
+        </div>
+      </div>
       {allowUploads && (
         <FileUploader
           className="file-explorer__uploader"
@@ -49,26 +73,6 @@ const FileExplorer = ({
           baseBucketPath={baseBucketPath}
         />
       )}
-      {/* <table className="file-explorer__files">
-        <thead className='file-explorer__files__header'>
-          <tr>
-            <th className='file-explorer__files__header__name'>Name</th>
-            <th className='file-explorer__files__header__size'>Size</th>
-            <th className='file-explorer__files__header__last-modified'>Last Modified</th>
-            <th className='file-explorer__files__header__actions'>Actions</th>
-          </tr>
-        </thead>
-        {testFileData.map((file) => (
-          <SingleFile
-            name={file.name}
-            type={file.type}
-            size={file.size}
-            lastModified={file.lastModified}
-            deletable={true}
-            downloadable={true}
-          />
-        ))}
-      </table> */}
     </div>
   </>)
 }

@@ -1,14 +1,49 @@
+@use '../../colors' as *;
+
 .single-file-wrapper {
   display: flex;
+  width: 100%;
+  padding: .375rem .5rem;
+  align-items: center;
+  justify-content: space-between;
+  &:not(:first-child) {
+    border-top: solid 1px $primary-light-color;
+  }
+  .single-file__left {
+    display: flex;
+    flex: 1 1 auto;
+  }
 
   .single-file__icon {
-
+    font-size: 1.5em;
+    padding: 0 .25em 0 0;
+    .material-icons {
+      font-size: inherit;
+      vertical-align: text-bottom;
+    }
+    .folder {
+      color: $cta-color;
+    }
   }
   .single-file__information {
+    font-size: .75rem;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     .single-file__sub-information {
       display: flex;
+      width: 100%;
+      justify-content: space-between;
+      font-size: .625em;
+    }
+  }
+  .single-file__actions {
+    justify-self: flex-end;
+    margin-left: 1rem;
+    .material-icons {
+      font-size: 1.5em;
+      vertical-align: text-bottom;
     }
   }
 }

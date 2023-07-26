@@ -3,7 +3,10 @@
   padding: .75rem;
   white-space: nowrap;
   width: 100%;
+  height: 100%;
   transition: all .5s ease-in-out;
+  display: flex;
+  flex-direction: column;
   h2 {
     white-space: nowrap;
     margin-top: .5em;
