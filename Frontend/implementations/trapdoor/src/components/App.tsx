@@ -5,7 +5,7 @@ import { PixelStreamingWrapper } from './PixelStreamingWrapper';
 import SideNav from './SideNav';
 import SessionSelector from './SessionSelector';
 
-export const App = () => {
+const App = () => {
   const [signalingServer, setSignalingServer] = useState('ws://localhost:80');
   const [showSessionSelector, setShowSessionSelector] = useState(true);
 
@@ -39,3 +39,5 @@ export const App = () => {
     </div>
   );
 };
+
+export default App;

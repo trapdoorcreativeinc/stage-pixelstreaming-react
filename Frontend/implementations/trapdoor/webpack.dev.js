@@ -10,6 +10,14 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         port: 3000,
+        historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                router: () => 'http://localhost:5001',
+                logLevel: 'debug'
+            }
+        }
     },
     loader: {
         loader: 'sass-loader',
