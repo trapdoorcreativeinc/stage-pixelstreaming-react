@@ -18,17 +18,28 @@
     background-color: $primary-light-color;
     padding: 1rem;
     border-radius: .25rem;
+    width: 32rem;
     max-width: 90%;
-    width: 33rem;
+    min-height: fit-content;
+    max-height: 90%;
     color: $primary-dark-color;
+    display: flex;
+    flex-direction: column;
 
     h1, h2, h3, h4, h5 {
-      margin-top: 0;
-      margin-bottom: .25em;
+      margin-top: .5em;
+      margin-bottom: .75em;
     }
     p {
       margin-top: 0;
       margin-bottom: .5em;
+      text-align: justify;
+      text-justify: distribute;
+    }
+    button {
+      margin-top: 1.5em;
+      align-self: flex-end;
+      justify-self: last baseline;
     }
   }
 }

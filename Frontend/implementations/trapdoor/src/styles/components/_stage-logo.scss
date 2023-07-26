@@ -95,11 +95,11 @@ $large-shape-width: $small-shape-width * 3;
     }
     .checkmark {
       .stage-logo-circle-foreground {
-        border-color: $accent-color-4;
+        border-color: $accent-color-3;
       }
       .stage-logo-inner-shape {
-        border-color: $accent-color-4;
-        border-left-color: #{$accent-color-4}00;
+        border-color: $accent-color-3;
+        border-left-color: #{$accent-color-3}00;
       }
     }
   }
@@ -126,11 +126,11 @@ $large-shape-width: $small-shape-width * 3;
     }
     .checkmark {
       .stage-logo-circle-foreground {
-        border-color: $accent-color-3;
+        border-color: $accent-color-4;
       }
       .stage-logo-inner-shape {
-        border-color: $accent-color-3;
-        border-left-color: #{$accent-color-3}00;
+        border-color: $accent-color-4;
+        border-left-color: #{$accent-color-4}00;
       }
     }
   }

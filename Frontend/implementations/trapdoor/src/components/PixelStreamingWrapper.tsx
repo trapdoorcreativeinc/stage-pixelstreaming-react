@@ -44,7 +44,7 @@ export const PixelStreamingWrapper = ({
       // Attach Pixel Streaming library to videoParent element:
       const config = new Config({ initialSettings });
       config.setFlagEnabled(Flags.AFKDetection, true);
-      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 300);
+      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 60);
 
       const streaming = new PixelStreaming(config, {
         videoElementParent: videoParent.current
@@ -171,10 +171,10 @@ export const PixelStreamingWrapper = ({
           {streamDisconnectModalMessage === "Websocket disconnect (1005) " ? (
             <p>It looks like something went wrong with Stage. We are getting another instance ready for you, but it could take a few minutes.</p>
           ) : (
-            <p>{streamDisconnectModalMessage}</p>
+            <p>{streamDisconnectModalMessage}.</p>
           )}
-          <p>Don't worry! We saved your work before disconnecting. You can find it in the menu under Sessions - Last Session</p>
-          <button onClick={() => {
+          <p>Don't worry! We saved your work before disconnecting. You can find it in the menu under Sessions - Last Session.</p>
+          <button className='action' onClick={() => {
             setStreamErrorModalVisible(false);
             navigate('/');
           }}>Reconnect</button>

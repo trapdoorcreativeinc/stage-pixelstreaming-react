@@ -9,7 +9,7 @@
 @mixin hoverBoxShadow($color) {
   &:hover:not(:disabled):not(.disabled) {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, color.adjust($color, $blackness: 10%) 0 -3px 0 inset;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
 }
 @mixin focusBoxShadow($color) {
@@ -20,7 +20,7 @@
 @mixin activeBoxShadow($color) {
   &:active:not(:disabled):not(.disabled) {
     box-shadow: color.adjust($color, $blackness: 10%) 0 3px 7px inset;
-    transform: translateY(1px);
+    transform: translateY(2px);
   }
 }
 @mixin colorButton($background-color, $text-color) {
@@ -42,7 +42,7 @@ button, .button {
   margin: .25em;
   font-size: inherit;
   font-weight: 300;
-  padding: .3em .5em .2em;
+  padding: .6em 1em .5em;
   border: none;
   cursor: pointer;
   user-select: none;

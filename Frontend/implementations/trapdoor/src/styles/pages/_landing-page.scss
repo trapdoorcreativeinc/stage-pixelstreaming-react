@@ -8,23 +8,24 @@
   .landing-page__content {
     display: grid;
     position: absolute;
-    padding: 2rem;
+    padding: 6rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: fit-content;
     grid-template-columns: 1fr 1fr;
-    // background-color: $primary-mid-color;
+    // background-color: $primary-light-color;
     align-items: center;
+    justify-content: center;
     border-radius: 4px;
     .landing-page__logo {
       font-size: 3rem;
       border-right: 1px solid $primary-light-color;
-      padding-right: 2rem;
+      padding-right: 4rem;
       justify-self: flex-end;
     }
     .landing-page__buttons {
-      padding-left: 2rem;
+      padding-left: 4rem;
       justify-self: baseline;
       .button {
         font-size: 1em;

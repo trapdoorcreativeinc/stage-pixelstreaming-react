@@ -12,7 +12,7 @@ interface FileUploaderProperties {
 export class FileUploaderFile {
   blob: File;
   uploadProgress: number;
-  constructor(blob: File, uploadProgress = 50) {
+  constructor(blob: File, uploadProgress = 100) {
     this.blob = blob;
     this.uploadProgress = uploadProgress;
   }
@@ -73,7 +73,7 @@ const FileUploader = ({
   return (<>
     <div className={`file-uploader-wrapper ${className}`}>
       <div className="file-uploader__input">
-        <label>
+        <label className="button action">
           <input type="file" 
             onChange={onFileInputChange}
             multiple
@@ -83,7 +83,7 @@ const FileUploader = ({
           <span className="material-icons">upload_file</span>
           <span>Upload File(s)</span>
         </label>
-        <label>
+        <label className="button action">
           <input type="file" 
             onChange={onFileInputChange}
             directory='true'
@@ -114,6 +114,8 @@ const FileUploader = ({
                     <StageLogo 
                       loading={file.uploadProgress < 100}
                       orientation={'horizontal'}
+                      logoSize="small"
+                      mode="light"
                       checkmark={file.uploadProgress === 100}
                       className="file-uploader__spinner__logo"
                     />

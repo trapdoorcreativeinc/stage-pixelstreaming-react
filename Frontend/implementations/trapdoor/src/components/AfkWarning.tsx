@@ -46,7 +46,7 @@ const AfkWarning = ({
         <>
         <h1>Are you still there?</h1>
             <p>It looks like you aren't currently using Stage. To save resources, we will be disconnecting you in {afkWarningCountDown} seconds. If you are still using Stage, please click the button below.</p>
-            <button onClick={() => {
+            <button className='action' onClick={() => {
               console.log('AfkWarning::buttonClick -- dismiss afk warning')
               afkWarningDismissFunction();
             }}>I'm still here!</button>
