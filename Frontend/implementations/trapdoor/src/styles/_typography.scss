@@ -100,8 +100,167 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-BlackItalic.eot');
+  src: local('Studio6 Black Italic'), local('Studio6-BlackItalic'),
+      url('./assets/fonts/Studio6/Studio6-BlackItalic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-BlackItalic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-BlackItalic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-Black.eot');
+  src: local('Studio6 Black'), local('Studio6-Black'),
+      url('./assets/fonts/Studio6/Studio6-Black.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-Black.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-Black.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-MediumItalic.eot');
+  src: local('Studio6 Medium Italic'), local('Studio6-MediumItalic'),
+      url('./assets/fonts/Studio6/Studio6-MediumItalic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-MediumItalic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-MediumItalic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-Regular.eot');
+  src: local('Studio6 Regular'), local('Studio6-Regular'),
+      url('./assets/fonts/Studio6/Studio6-Regular.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-Regular.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-Regular.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-Italic.eot');
+  src: local('Studio6 Italic'), local('Studio6-Italic'),
+      url('./assets/fonts/Studio6/Studio6-Italic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-Italic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-Italic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-DemiBold.eot');
+  src: local('Studio6 DemiBold'), local('Studio6-DemiBold'),
+      url('./assets/fonts/Studio6/Studio6-DemiBold.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-DemiBold.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-DemiBold.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-DemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-Medium.eot');
+  src: local('Studio6 Medium'), local('Studio6-Medium'),
+      url('./assets/fonts/Studio6/Studio6-Medium.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-Medium.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-Medium.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-ExtraBold.eot');
+  src: local('Studio6 ExtraBold'), local('Studio6-ExtraBold'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBold.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBold.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBold.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-Bold.eot');
+  src: local('Studio6 Bold'), local('Studio6-Bold'),
+      url('./assets/fonts/Studio6/Studio6-Bold.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-Bold.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-Bold.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-ExtraBoldItalic.eot');
+  src: local('Studio6 ExtraBold Italic'), local('Studio6-ExtraBoldItalic'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBoldItalic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBoldItalic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-BoldItalic.eot');
+  src: local('Studio6 Bold Italic'), local('Studio6-BoldItalic'),
+      url('./assets/fonts/Studio6/Studio6-BoldItalic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-BoldItalic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-BoldItalic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Studio6';
+  src: url('./assets/fonts/Studio6/Studio6-DemiBoldItalic.eot');
+  src: local('Studio6 DemiBold Italic'), local('Studio6-DemiBoldItalic'),
+      url('./assets/fonts/Studio6/Studio6-DemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Studio6/Studio6-DemiBoldItalic.woff2') format('woff2'),
+      url('./assets/fonts/Studio6/Studio6-DemiBoldItalic.woff') format('woff'),
+      url('./assets/fonts/Studio6/Studio6-DemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+
+
 h1, h2, h3, h4, h5, h6, button {
-  font-family: 'TT Commons', 'Open Sans', 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: 'Studio6', 'TT Commons', Helvetica, Arial, sans-serif;
   font-weight: 300;
   strong {
     font-weight: 500;
