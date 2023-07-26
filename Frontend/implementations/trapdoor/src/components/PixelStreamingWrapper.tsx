@@ -44,7 +44,7 @@ export const PixelStreamingWrapper = ({
       // Attach Pixel Streaming library to videoParent element:
       const config = new Config({ initialSettings });
       config.setFlagEnabled(Flags.AFKDetection, true);
-      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 60);
+      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 3);
 
       const streaming = new PixelStreaming(config, {
         videoElementParent: videoParent.current
@@ -173,7 +173,7 @@ export const PixelStreamingWrapper = ({
           ) : (
             <p>{streamDisconnectModalMessage}.</p>
           )}
-          <p>Don't worry! We saved your work before disconnecting. You can find it in the menu under Sessions - Last Session.</p>
+          <p>There is no need to worry! Your work has been saved before disconnecting. You can find it next time you open Stage in the Main Menu (<span className='material-icons'>menu</span>) <span className='material-icons'>arrow_forward</span> Sessions <span className='material-icons'>arrow_forward</span> Last Session.</p>
           <button className='action' onClick={() => {
             setStreamErrorModalVisible(false);
             navigate('/');

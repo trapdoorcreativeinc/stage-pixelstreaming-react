@@ -59,6 +59,9 @@ button, .button {
     cursor: default;
     pointer-events: none;
   }
+  &.slim {
+    padding: .35em .5em .2em;
+  }
   &.danger {
     @include colorButton($accent-color-1, $primary-light-color);
   }

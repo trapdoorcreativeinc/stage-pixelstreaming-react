@@ -56,6 +56,7 @@ const FileUploader = ({
   const [uploadStatus, setUploadStatus] = useState('');
   const fileInputRef = createRef<HTMLInputElement>();
   const folderInputRef = createRef<HTMLInputElement>();
+  const dropFileInputRef = createRef<HTMLInputElement>();
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUploadStatus('');
@@ -73,7 +74,7 @@ const FileUploader = ({
   return (<>
     <div className={`file-uploader-wrapper ${className}`}>
       <div className="file-uploader__input">
-        <label className="button action">
+        <label className="button action slim">
           <input type="file" 
             onChange={onFileInputChange}
             multiple
@@ -83,7 +84,7 @@ const FileUploader = ({
           <span className="material-icons">upload_file</span>
           <span>Upload File(s)</span>
         </label>
-        <label className="button action">
+        <label className="button action slim">
           <input type="file" 
             onChange={onFileInputChange}
             directory='true'
@@ -91,7 +92,7 @@ const FileUploader = ({
             mozdirectory='true'
             multiple
             disabled={uploading}
-            ref={fileInputRef}
+            ref={folderInputRef}
           />
           <span className="material-icons">drive_folder_upload</span>
           <span>Upload Folder</span>
@@ -100,6 +101,22 @@ const FileUploader = ({
       <div className="file-uploader__status">
         {uploadStatus}
       </div>
+      {!uploading && filesToUpload.length === 0 && (
+      <div className='file-uploader__dropzone'>
+        <label>
+          <div className='file-uploader__dropzone__text'>
+            <span className='material-icons'>upload_file</span>
+            <p>Drag and drop files here</p>
+          </div>
+          <input type="file"
+            onChange={onFileInputChange}
+            multiple
+            disabled={uploading}
+            ref={dropFileInputRef}
+          />
+        </label>
+      </div>
+      )}
       {filesToUpload.length > 0 && (
         <div className="file-uploader__files">
           {filesToUpload.map((file, index) => {
