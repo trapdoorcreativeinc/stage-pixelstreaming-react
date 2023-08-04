@@ -1,6 +1,7 @@
 import React, { ReactHTMLElement, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import AccountSettings from './settings/AccountSettings';
 import ModelsPage from './settings/ModelsPage';
+import RendersPage from './settings/RendersPage';
 import { SideLoadingContext, SideLoadingProvider } from '../contexts/SideLoadingContext';
 import StageLogo from './StageLogo';
 
@@ -31,6 +32,10 @@ const SideNav = ({
       case SideNavViews.MODELS:
         return (
           <ModelsPage />
+        )
+      case SideNavViews.RENDERS:
+        return (
+          <RendersPage />
         )
       default:
         return <></>
