@@ -1,11 +1,30 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { Dispatch, createContext, useReducer, useEffect, ReactNode } from 'react';
+import { getCompanyData, getCurrentUser } from '../helpers/api/auth';
 
-class INITIAL_STATE {
-  currentUser = { auth: {}, data: {}};
-  enterprise = {};
+class currentUserData {
+  auth: any = {};
+  data: any = {};
 }
 
-const currentUserReducer = (state, action) => {
+class UserAuthData {
+  currentUser = new currentUserData();
+  enterprise: any = {};
+}
+
+interface UserAuthContextInterface {
+  userAuth: UserAuthData,
+  setUserAuth: Dispatch<any>
+}
+
+const UserAuthContext = createContext<UserAuthContextInterface>({
+  userAuth: new UserAuthData(),
+  setUserAuth: () => {}
+});
+
+type UserAuthAction = 
+{ type: 'REMOVE_ALL_DATA' | 'STORE_USER_DATA' | 'STORE_ENTERPRISE_DATA' | 'STORE_ALL_DATA', payload: any };
+
+const currentUserReducer = (state: any, action: UserAuthAction) => {
   switch (action.type) {
     case "STORE_USER_DATA":
       return action.payload;
@@ -14,7 +33,7 @@ const currentUserReducer = (state, action) => {
   }
 };
 
-const enterpriseReducer = (state, action) => {
+const enterpriseReducer = (state: any, action: UserAuthAction) => {
   switch (action.type) {
     case "STORE_ENTERPRISE_DATA":
       return action.payload;
@@ -24,10 +43,10 @@ const enterpriseReducer = (state, action) => {
 }
 
 // Sets up a way to remove all of the data on logout
-const stateReducer = ({ currentUser, enterprise }, action) => {
+const stateReducer = ({ currentUser, enterprise }: UserAuthData, action: UserAuthAction) => {
   switch (action.type) {
     case 'REMOVE_ALL_DATA':
-      return new INITIAL_STATE();
+      return new UserAuthData();
     case 'STORE_USER_DATA':
       return {
         currentUser: currentUserReducer(currentUser, action),
@@ -47,35 +66,41 @@ const stateReducer = ({ currentUser, enterprise }, action) => {
   }
 };
 
+interface UserAuthProviderProps {
+  children: ReactNode;
+}
+
 // Actual provider that adds the state to be accessible anywhere
-const ContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(stateReducer, new INITIAL_STATE());
+const UserAuthContextProvider = ({ children }: UserAuthProviderProps) => {
+  const [userAuth, setUserAuth] = useReducer(stateReducer, new UserAuthData());
 
   useEffect(() => {
+    console.log("UserAuthContextProvider useEffect");
     (async () => {
       // const loggedInUser = await doCurrentUserFetch();
       // if (loggedInUser) {
       //   dispatch({ type: 'STORE_USER_DATA', payload: loggedInUser });
       // }
       // Firebase.refreshUser(dispatch)
+      console.log("UserAuthContextProvider useEffect async");
       const currentUserData = await getCurrentUser();
-      // console.log("Got user for context: ", currentUserData);
+      console.log("Got user for context: ", currentUserData);
       if (currentUserData) {
         console.log("Got user for context: ", currentUserData);
         if (currentUserData.data.Subscription === 'Enterprise' && currentUserData.data.Company) {
           const companyData = await getCompanyData(currentUserData.auth.uid, currentUserData.data.Company);
           console.log("Got company for context: ", companyData);
-          dispatch({ type: 'STORE_ALL_DATA', payload: { currentUser: currentUserData, enterprise: companyData } });
+          setUserAuth({ type: 'STORE_ALL_DATA', payload: { currentUser: currentUserData, enterprise: companyData } });
         } else {
-          dispatch({ type: 'STORE_USER_DATA', payload: currentUserData });
+          setUserAuth({ type: 'STORE_USER_DATA', payload: currentUserData });
         }
       }
     })();
   }, []);
 
   return (
-    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+    <UserAuthContext.Provider value={{ userAuth, setUserAuth }}>{children}</UserAuthContext.Provider>
   );
 };
 
-export { Context, ContextProvider };
+export { UserAuthContext, UserAuthContextProvider };

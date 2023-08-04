@@ -1,6 +1,8 @@
-import React, { HTMLAttributes, createRef, useState } from "react";
+import React, { HTMLAttributes, createRef, useContext, useEffect, useRef, useState } from "react";
 import StageLogo from "../StageLogo";
 import { formatBytes } from "../../helpers/fileManagement";
+import { uploadMultipleFiles } from "../../helpers/api/fileManagement";
+import { UserAuthContext } from "../../contexts/UserAuthContext";
 
 interface FileUploaderProperties {
   className?: string;
@@ -12,7 +14,7 @@ interface FileUploaderProperties {
 export class FileUploaderFile {
   blob: File;
   uploadProgress: number;
-  constructor(blob: File, uploadProgress = 100) {
+  constructor(blob: File, uploadProgress = 0) {
     this.blob = blob;
     this.uploadProgress = uploadProgress;
   }
@@ -26,21 +28,91 @@ declare module 'react' {
   }
 }
 
-const findFileToUpdate = (files: File[], file: File) => {
+const uploadFiles = async (
+  files: FileUploaderFile[], 
+  baseBucketPath: string, 
+  path: string, 
+  uid: string,
+  setLoading: Function,
+  setFiles: Function,
+  setUploadStatus: Function,
+  callback: Function,
+  fileInputRef: React.RefObject<HTMLInputElement>,
+  folderInputRef: React.RefObject<HTMLInputElement>,
+) => {
+  try {
+    setLoading(true);
+    setUploadStatus('Uploading...');
+    uploadMultipleFiles(
+      baseBucketPath,
+      uid, 
+      path, 
+      files, 
+      // file progress callback
+      (progressPercent: number, file: FileUploaderFile) => {
+        setFiles((prevFiles: FileUploaderFile[]) => {
+          const temp = [...prevFiles];
+          const fileToUpdate = findFileToUpdate(temp, file);
+          fileToUpdate.uploadProgress = progressPercent;
+          return temp;
+        });
+      },
+      // file finished callback
+      (file: FileUploaderFile) => {
+        setFiles((prevFiles: FileUploaderFile[]) => {
+          const temp = [...prevFiles];
+          const fileToUpdate = findFileToUpdate(temp, file);
+          if (fileToUpdate) {
+            fileToUpdate.uploadProgress = 100;
+            return temp;
+          }
+          else return prevFiles;
+        });
+      },
+      // all files finished callback
+      () => {
+        setUploadStatus('Upload Complete!');
+        setTimeout(() => {
+          setFiles([]);
+          setLoading(false);
+          console.log('All files finished uploading', fileInputRef, folderInputRef);
+          fileInputRef.current.value = '';
+          folderInputRef.current.value = '';
+          callback();
+        }, 1000);
+      },
+      // error callback
+      () => {
+        setFiles([]);
+        setLoading(false);
+        fileInputRef.current.value = '';
+        folderInputRef.current.value = '';
+        setUploadStatus('Upload Failed. Please try again.');
+      }
+    );
+  }
+  catch (err) {
+    console.log('Error uploading files', err);
+    // setLoading({ type: 'STOP_LOADING' });
+  }
+}
+
+const findFileToUpdate = (files: FileUploaderFile[], file: FileUploaderFile) => {
   const fileToUpdate = files[
     files.findIndex((f) => {
-      if (file.webkitRelativePath !== '') {
-        if (f.webkitRelativePath !== file.webkitRelativePath) {
+      if (file.blob.webkitRelativePath !== '') {
+        if (f.blob.webkitRelativePath === file.blob.webkitRelativePath) {
           return true;
         }
       } else {
-        if (f.name === file.name) {
+        if (f.blob.name === file.blob.name) {
           return true;
         }
       }
       return false;
     })
   ];
+  console.log('File to update', fileToUpdate);
 
   return fileToUpdate;
 }
@@ -51,13 +123,13 @@ const FileUploader = ({
   callback,
   baseBucketPath,
 }: FileUploaderProperties) => {
+  const { userAuth } = useContext(UserAuthContext);
   const [filesToUpload, setFilesToUpload] = useState<FileUploaderFile[]>([]);
   const [uploading, setUploading] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
-  const fileInputRef = createRef<HTMLInputElement>();
-  const folderInputRef = createRef<HTMLInputElement>();
-  const dropFileInputRef = createRef<HTMLInputElement>();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const folderInputRef = useRef<HTMLInputElement>(null);
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Files changed', e.target.files);
@@ -72,6 +144,25 @@ const FileUploader = ({
       setFilesToUpload(newFiles);
     }
   }
+
+  useEffect(() => {
+    console.log('Files to upload changed', filesToUpload, uploading)
+    if (filesToUpload.length > 0 && !uploading) {
+      uploadFiles(
+        filesToUpload, 
+        baseBucketPath, 
+        path, 
+        userAuth.currentUser.auth.uid,
+        setUploading,
+        setFilesToUpload,
+        setUploadStatus,
+        callback,
+        fileInputRef,
+        folderInputRef
+      );
+    }
+  }, [filesToUpload, uploading, baseBucketPath, path, userAuth.currentUser.auth.uid, callback, fileInputRef, folderInputRef])
+
   const startDraggingOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -85,11 +176,19 @@ const FileUploader = ({
 
   return (<>
     <div className={`file-uploader-wrapper ${className}`}>
+      {/* {filesToUpload.length > 0  (
+      <div className="file-uploader__header" >
+        <h4>Uploads</h4>
+      </div>
+      )} */}
       <div className="file-uploader__status">
         {uploadStatus}
       </div>
-      {!uploading && filesToUpload.length === 0 && (
+      {/* {filesToUpload.length === 0 && ( */}
       <div className={`file-uploader__dropzone ${isDraggingOver && 'dragging-over'}`}
+        style={{
+          display: filesToUpload.length === 0 ? 'flex' : 'none',
+        }}
         onDrag={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -145,7 +244,7 @@ const FileUploader = ({
           </p>
         </div>
       </div>
-      )}
+      {/* )} */}
       {filesToUpload.length > 0 && (
         <div className="file-uploader__files">
           {filesToUpload.map((file, index) => {

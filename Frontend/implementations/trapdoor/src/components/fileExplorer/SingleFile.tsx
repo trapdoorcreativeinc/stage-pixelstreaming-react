@@ -1,11 +1,12 @@
 import React from "react";
 import { formatBytes } from "../../helpers/fileManagement";
+import { formatDate } from "../../helpers/api/fileManagement";
 
 interface SingleFileProperties {
   name: string;
   type: string;
   size?: number;
-  lastModified?: number;
+  lastModified?: string;
   deletable?: boolean;
   downloadable?: boolean;
   onDelete?: () => void;
@@ -31,10 +32,10 @@ const SingleFile = ({
         </span>
       </div>
       <div className="single-file__information">
-        <div className="single-file__name">{name}</div>
+        <div className="single-file__name">{name.split('/').join('')}</div>
         <div className="single-file__sub-information">
-          <div className="single-file__size">{formatBytes(size)}</div>
-          <div className="single-file__last-modified">{lastModified}</div>
+          <div className="single-file__size">{type !== 'folder' && formatBytes(size)}</div>
+          <div className="single-file__last-modified">{lastModified ? formatDate(lastModified) : ''}</div>
         </div>
       </div>
     </div>

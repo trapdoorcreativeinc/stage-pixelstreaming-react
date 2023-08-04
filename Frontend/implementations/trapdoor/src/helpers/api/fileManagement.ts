@@ -1,21 +1,50 @@
+import { FileUploaderFile } from "../../components/fileExplorer/FileUploader";
 import { authenticatedFormPost, getCSRFTokenCookie } from "./auth";
 import axios, { AxiosProgressEvent } from "axios";
 
+
+export const formatDate = (date: string) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const day = new Date(date).toLocaleDateString("en-US", { timeZone });
+  return day;
+}
+
+export const uploadMultipleFiles = async (
+  parentDirectory: string,
+  userId: string,
+  path: string,
+  files: FileUploaderFile[],
+  fileProgressCallback: (progress: number, file: FileUploaderFile) => void,
+  fileFinishedCallback: (file: FileUploaderFile) => void,
+  allFilesFinishedCallback: () => void,
+  errorCallback: (file: FileUploaderFile) => void
+) => {
+  try {
+    for (const file of files) {
+      await uploadFile(parentDirectory, userId, path, file, fileProgressCallback, fileFinishedCallback);
+    }
+  }
+  catch (error) {
+    console.error('Error uploading multiple files: ', error);
+    errorCallback(error);
+  }
+  allFilesFinishedCallback();
+}
 
 export const uploadFile = async (
   parentDirectory: string, 
   userId: string, 
   path: string, 
-  file: File, 
-  progressCallback: (progress: number, file: File) => void, 
-  finishedCallback: (file: File) => void
+  file: FileUploaderFile, 
+  progressCallback: (progress: number, file: FileUploaderFile) => void, 
+  finishedCallback: (file: FileUploaderFile) => void
 ) => {
   const formData = new FormData();
-  formData.append("fileSize", file.size.toString());
+  formData.append("fileSize", file.blob.size.toString());
   formData.append("isFolder", false.toString());
   formData.append("userId", userId);
   formData.append("currentPath", path);
-  formData.append("webkitRelativePath", file.webkitRelativePath || file.name);
+  formData.append("webkitRelativePath", file.blob.webkitRelativePath || file.blob.name);
 
   console.log(`trying to upload to url: /api/v1/aws/upload/${parentDirectory}/${userId}`);
 
@@ -26,16 +55,19 @@ export const uploadFile = async (
     headers: { "Content-Type": "multipart/form-data" },
   })
   .then(async (response) => {
-    console.log('Response from request for upolad url: ', response);
+    console.log('Response from request for upload url: ', response.data);
     if (response.status === 200 && response.data?.url) {
       await axios({
         method: "PUT",
         url: response.data.url,
-        data: file,
-        headers: { "Content-Type": file.type },
+        data: file.blob,
+        headers: { "Content-Type": file.blob.type },
         onUploadProgress: (progressEvent: AxiosProgressEvent) => { 
           console.log('progressEvent: ', progressEvent);
-          const totalLength = progressEvent.event?.lengthComputable ? progressEvent.total : progressEvent.event?.target?.getResponseHeader('content-length') || progressEvent.event?.target?.getResponseHeader('x-decompressed-content-length');
+          const totalLength = progressEvent.event?.lengthComputable 
+          ? progressEvent.total 
+          : progressEvent.event?.target?.getResponseHeader('content-length') || 
+            progressEvent.event?.target?.getResponseHeader('x-decompressed-content-length');
           if (totalLength !== null) {
             const progress = Math.round((progressEvent.loaded * 100) / totalLength);
             progressCallback(progress, file);
@@ -45,21 +77,21 @@ export const uploadFile = async (
       .then((response) => {
         console.log('Response from request for upload file: ', response);
         if (response.status !== 200) {
-          alert(`Error uploading file: ${file.name}. Please try again later. If the problem persists, please contact support.`);
+          alert(`Error uploading file: ${file.blob.name}. Please try again later. If the problem persists, please contact support.`);
         }
       })
       .catch((error) => {
-        console.error(`Error uploading file: ${file.name}`, error);
-        alert(`Error uploading file: ${file.name}. Please try again later. If the problem persists, please contact support.`);
+        console.error(`Error uploading file: ${file.blob.name}`, error);
+        alert(`Error uploading file: ${file.blob.name}. Please try again later. If the problem persists, please contact support.`);
       })
     }
     else {
-      alert(`Error uploading file: ${file.name}. Please try again later. If the problem persists, please contact support.`);
+      alert(`Error uploading file: ${file.blob.name}. Please try again later. If the problem persists, please contact support.`);
     }
   })
   .catch((error) => {
-    console.error(`Error uploading file: ${file.name}`, error);
-    alert(`Error uploading file: ${file.name}. Please try again later. If the problem persists, please contact support.`);
+    console.error(`Error uploading file: ${file.blob.name}`, error);
+    alert(`Error uploading file: ${file.blob.name}. Please try again later. If the problem persists, please contact support.`);
   })
 
   finishedCallback(file);
@@ -71,7 +103,7 @@ export const readDirectory = async (parentDirectory: string, userId: string, pat
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "X-CSRFToken": getCSRFTokenCookie(),
+      "CSRF-Token": getCSRFTokenCookie(),
     },
     body: JSON.stringify({
       path,

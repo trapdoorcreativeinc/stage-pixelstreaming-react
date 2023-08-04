@@ -1,66 +1,93 @@
 import React, { useEffect } from 'react';
 import SingleFile from './SingleFile';
 import FileUploader from './FileUploader';
+import { UserAuthContext } from '../../contexts/UserAuthContext';
+import { SideLoadingContext } from '../../contexts/SideLoadingContext';
+import { readDirectory } from '../../helpers/api/fileManagement';
 
-const testFileData = [{
-  name: 'Test Folder 1',
-  type: 'folder',
-}, {
-  name: 'Test Folder 2',
-  type: 'folder',
-}, {
-  name: 'Test Folder 3',
-  type: 'folder',
-}, {
-  name: 'Test File 1',
-  type: 'glb',
-  size: 123456,
-  lastModified: 123456789,
-}, {
-  name: 'Test File 2',
-  type: 'glb',
-  size: 123456,
-  lastModified: 123456789,
-}, {
-  name: 'Test File 3',
-  type: 'glb',
-  size: 123456,
-  lastModified: 123456789,
-}]
+const getFiles = async (
+  baseBucketPath: string, 
+  path: string,
+  uid: string,
+  setLoading: Function,
+  setLocalFiles: Function,
+) => {
+  try {
+    setLoading({
+      type: 'START_LOADING_WITH_MESSAGE',
+      action: {loadingMessage: 'Loading Files...', loadingProgress: -1 }
+    });
+    const res = await readDirectory('Users', uid, `/${baseBucketPath}/${path}`);
+    console.log('Response', res);
+    let folderPaths: string[] = [];
+    if (res?.CommonPrefixes) {
+      folderPaths = res.CommonPrefixes.map((folder: any) => {
+        folder['Key'] = folder['Prefix'];
+        return folder;
+      });
+    }
+    const filteredFiles = res?.Contents?.filter((file: any) => {
+      return file.Key !== `Users/${uid}/${baseBucketPath}/${path}`;
+    });
+    console.log('Folder Paths', folderPaths);
+    console.log('Filtered Files', filteredFiles);
+    const temp = [...folderPaths, ...filteredFiles].map((file: any) => ({
+      ...file,
+      Name: file.Key.split(`/${baseBucketPath}/`)[1],
+    }));
+    console.log('Files', temp);
+    setLocalFiles(temp);
+    setLoading({ type: 'STOP_LOADING' });
+  }
+  catch (err) {
+    console.log('Error getting files', err);
+    setLoading({ type: 'STOP_LOADING' });
+  }
+
+}
 
 interface FileExplorerProperties {
   allowUploads?: boolean;
   allowDownloads?: boolean;
   baseBucketPath?: string;
+  deletable?: boolean;
 }
 
 const FileExplorer = ({
   allowUploads = false,
   allowDownloads = false,
   baseBucketPath = 'Models',
+  deletable = true,
 }: FileExplorerProperties) => {
-  const [currentPath, setCurrentPath] = React.useState(baseBucketPath);
+  const { userAuth } = React.useContext(UserAuthContext);
+  const { sideLoadingData, setSideLoadingData } = React.useContext(SideLoadingContext);
+  const [currentPath, setCurrentPath] = React.useState('');
   const [files, setFiles] = React.useState([]);
+
   useEffect(() => {
-    
-  }, [])
+    if (userAuth.currentUser.auth?.uid) {
+      getFiles(baseBucketPath, currentPath, userAuth.currentUser.auth?.uid, setSideLoadingData, setFiles);
+    }
+  }, [baseBucketPath, currentPath, userAuth.currentUser.auth?.uid, setSideLoadingData, setFiles])
+
   return (<>
     <div className="file-explorer-wrapper">
       <div className="file-explorer">
         <div className='file-explorer__header'>
-          <div onClick={() => setCurrentPath(baseBucketPath)}>{baseBucketPath}</div>
+          <div onClick={() => setCurrentPath('')}>{baseBucketPath}</div>
           <span>/</span>
           <div>Test Folder</div>
         </div>
         <div className="file-explorer__files">
-          {testFileData.map((file) => (
+          {files.map((file) => (
             <SingleFile
-              name={file.name}
-              type={file.type}
-              size={file.size}
-              lastModified={file.lastModified}
-              deletable={true}
-              downloadable={false}
+              name={file.Name}
+              type={file.Prefix ? 'folder' : file.Name.split('.').pop() || ''}
+              size={file.Size || 0}
+              key={file.Key}
+              lastModified={file.LastModified}
+              deletable={deletable}
+              downloadable={allowDownloads}
             />
           ))}
         </div>
