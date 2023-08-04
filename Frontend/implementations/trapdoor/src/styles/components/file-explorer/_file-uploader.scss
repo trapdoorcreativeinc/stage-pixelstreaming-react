@@ -5,11 +5,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: .75rem;
+  // margin-bottom: .75rem;
   .file-uploader__header {
     h4 {
       margin: .5em 0 .5em;
     }
+  }
+  .file-uploader__status {
+    margin: 0 0 .5rem 0;
   }
   .file-uploader__dropzone {
     width:100%;

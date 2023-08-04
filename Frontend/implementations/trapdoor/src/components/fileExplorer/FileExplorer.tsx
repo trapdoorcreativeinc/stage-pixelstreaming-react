@@ -15,10 +15,10 @@ const getFiles = async (
   try {
     setLoading({
       type: 'START_LOADING_WITH_MESSAGE',
-      action: {loadingMessage: 'Loading Files...', loadingProgress: -1 }
+      message: 'Loading Data...'
     });
     const res = await readDirectory('Users', uid, `/${baseBucketPath}/${path}`);
-    console.log('Response', res);
+    console.log('getFiles -- Response', res);
     let folderPaths: string[] = [];
     if (res?.CommonPrefixes) {
       folderPaths = res.CommonPrefixes.map((folder: any) => {
@@ -28,14 +28,14 @@ const getFiles = async (
     }
     const filteredFiles = res?.Contents?.filter((file: any) => {
       return file.Key !== `Users/${uid}/${baseBucketPath}/${path}`;
-    });
-    console.log('Folder Paths', folderPaths);
-    console.log('Filtered Files', filteredFiles);
+    }) || [];
+    console.log('getFiles -- Folder Paths', folderPaths);
+    console.log('getFiles -- Filtered Files', filteredFiles);
     const temp = [...folderPaths, ...filteredFiles].map((file: any) => ({
       ...file,
       Name: file.Key.split(`/${baseBucketPath}/`)[1],
     }));
-    console.log('Files', temp);
+    console.log('getFiles -- Files', temp);
     setLocalFiles(temp);
     setLoading({ type: 'STOP_LOADING' });
   }
@@ -74,9 +74,16 @@ const FileExplorer = ({
     <div className="file-explorer-wrapper">
       <div className="file-explorer">
         <div className='file-explorer__header'>
-          <div onClick={() => setCurrentPath('')}>{baseBucketPath}</div>
-          <span>/</span>
-          <div>Test Folder</div>
+          <span onClick={() => setCurrentPath('')}>{baseBucketPath}</span>
+          {currentPath.split('/').map((folder, index) => {
+            let pathToDirectory = currentPath.split('/').slice(0, index + 1).join('/');
+            return (<>
+              <span className='spacer' key={`header-splitter-${index}`}>/</span>
+              <span key={`header-folder-${index}`}
+                onClick={() => setCurrentPath(pathToDirectory)}
+              >{folder}</span>
+            </>)
+          })}
         </div>
         <div className="file-explorer__files">
           {files.map((file) => (
@@ -88,6 +95,10 @@ const FileExplorer = ({
               lastModified={file.LastModified}
               deletable={deletable}
               downloadable={allowDownloads}
+              openFolder={() => {
+                console.log('Open folder', file);
+                setCurrentPath(file.Name);
+              }}
             />
           ))}
         </div>

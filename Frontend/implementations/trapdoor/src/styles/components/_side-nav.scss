@@ -18,9 +18,31 @@
     flex-direction: column;
     color: $primary-light-color;
     border-right: $secondary-dark-color solid 1px;
+    position: relative;
     &.hidden {
       border-right: #{$secondary-dark-color}00 solid 1px;
       width: 0;
+    }
+
+    .side-nav__loading-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #{$primary-dark-color}aa;
+      .side-nav__loading__progress {
+        background-color: $primary-light-color;
+        .side-nav__loading__progress__bar {
+          background-color: $supplementary-color;
+
+        }
+      }
+
     }
   }
 }

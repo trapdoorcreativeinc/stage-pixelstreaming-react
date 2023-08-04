@@ -11,6 +11,12 @@ interface SingleFileProperties {
   downloadable?: boolean;
   onDelete?: () => void;
   onDownload?: () => void;
+  openFolder?: () => void;
+}
+
+const trimFileName = (fileName: string) => {
+  const splitName = fileName.split('/');
+  return splitName[splitName.length - 1] || splitName[splitName.length - 2];
 }
 
 const SingleFile = ({
@@ -22,9 +28,17 @@ const SingleFile = ({
   downloadable = false,
   onDelete,
   onDownload,
+  openFolder
 }: SingleFileProperties) => {
   return (<>
-  <div className="single-file-wrapper">
+  <div className={`single-file-wrapper ${type === 'folder' && 'folder'} `}
+    onClick={() => {
+      if (type === 'folder') {
+        console.log('open folder');
+        openFolder && openFolder();
+      }
+    }}
+  >
     <div className="single-file__left">
       <div className="single-file__icon">
         <span className={`material-icons ${type}`}>
@@ -32,7 +46,7 @@ const SingleFile = ({
         </span>
       </div>
       <div className="single-file__information">
-        <div className="single-file__name">{name.split('/').join('')}</div>
+        <div className="single-file__name">{trimFileName(name)}</div>
         <div className="single-file__sub-information">
           <div className="single-file__size">{type !== 'folder' && formatBytes(size)}</div>
           <div className="single-file__last-modified">{lastModified ? formatDate(lastModified) : ''}</div>

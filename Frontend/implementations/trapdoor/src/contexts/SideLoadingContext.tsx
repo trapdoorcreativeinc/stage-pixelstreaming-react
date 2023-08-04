@@ -67,6 +67,7 @@ type LoadingAction =
 
 
 function loadingReducer (oldVal: SideLoadingData, action: LoadingAction): SideLoadingData {
+  // console.log("LoadingReducer -- Running reducer", action);
   // console.log("loadingReducer -- Old value:", oldVal)
   let newVal = oldVal.getNewVal();
   // console.log("loadingReducer -- New value:", newVal)
@@ -107,6 +108,7 @@ function loadingReducer (oldVal: SideLoadingData, action: LoadingAction): SideLo
       break;
     case "START_LOADING_WITH_MESSAGE":
     case "UPDATE_LOADING_MESSAGE":
+      console.log("Setting loading message:", action.message)
       newVal.setIsLoading(true);
       newVal.setLoadingMessage(action.message);
       break
@@ -138,7 +140,7 @@ interface LoadingProviderProps {
   children: React.ReactNode
 }
 
-function LoadingProvider ({children}: LoadingProviderProps) {
+function SideLoadingProvider ({children}: LoadingProviderProps) {
   const [sideLoadingData, setSideLoadingData] = useReducer(loadingReducer, new SideLoadingData());
 
   return (
@@ -149,4 +151,4 @@ function LoadingProvider ({children}: LoadingProviderProps) {
   )
 }
 
-export { SideLoadingContext, LoadingProvider };
+export { SideLoadingContext, SideLoadingProvider };

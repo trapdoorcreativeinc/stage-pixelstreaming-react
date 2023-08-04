@@ -1,6 +1,8 @@
-import React, { ReactHTMLElement, ReactNode, useCallback, useState } from 'react';
+import React, { ReactHTMLElement, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import AccountSettings from './settings/AccountSettings';
 import ModelsPage from './settings/ModelsPage';
+import { SideLoadingContext, SideLoadingProvider } from '../contexts/SideLoadingContext';
+import StageLogo from './StageLogo';
 
 enum SideNavViews {
   ACCOUNT,
@@ -13,6 +15,7 @@ enum SideNavViews {
 const SideNav = ({
 
 }) => {
+  const { sideLoadingData } = useContext(SideLoadingContext);
   const [selectedView, setSelectedView] = useState<SideNavViews | null>(null);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -46,6 +49,10 @@ const SideNav = ({
     })
   }, [showMenu, setSelectedView, setShowMenu])
 
+  useEffect(() => {
+    console.log('SideNavLoadingMessage changed', sideLoadingData.loadingMessage)
+  }, [sideLoadingData.loadingMessage]);
+
   const buttons = useCallback(() => {
     const buttonData = [{
     //   icon: 'person',
@@ -68,6 +75,19 @@ const SideNav = ({
     <div className="side-nav">
       <div className={`side-nav__content ${showMenu ? '' : 'hidden'}`}>
         {contentView()}
+        {sideLoadingData.isLoading && (
+          <div className="side-nav__loading-wrapper">
+            <StageLogo
+              loading={true}
+              mode="light"
+            >{sideLoadingData.loadingMessage}</StageLogo>
+            {sideLoadingData.showLoadingProgress && (
+              <div className="side-nav__loading__progress">
+                <div className="side-nav__loading__progress__bar" style={{width: `${sideLoadingData.loadingProgress}%`}}></div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="side-nav__buttons">
         <div className='side-nav__buttons__top'>

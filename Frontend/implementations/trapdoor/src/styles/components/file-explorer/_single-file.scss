@@ -1,4 +1,5 @@
 @use '../../colors' as *;
+@use 'sass:color' as color;
 
 .single-file-wrapper {
   display: flex;
@@ -6,6 +7,13 @@
   padding: .375rem .5rem;
   align-items: center;
   justify-content: space-between;
+
+  &.folder {
+    cursor: pointer;
+    &:hover {
+      background-color: color.adjust($secondary-dark-color, $lightness: -5%);
+    }
+  }
   &:not(:first-child) {
     border-top: solid 1px $primary-light-color;
   }
