@@ -44,7 +44,7 @@ export const PixelStreamingWrapper = ({
       // Attach Pixel Streaming library to videoParent element:
       const config = new Config({ initialSettings });
       config.setFlagEnabled(Flags.AFKDetection, true);
-      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 3);
+      config.setNumericSetting(NumericParameters.AFKTimeoutSecs, 15);
 
       const streaming = new PixelStreaming(config, {
         videoElementParent: videoParent.current

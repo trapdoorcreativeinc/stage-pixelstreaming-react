@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import StageLogo from '../components/StageLogo';
 import LoadingScreen from '../components/LoadingScreen';
+import { StreamStatusContext } from '../contexts/StreamStatusContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoadingPage = () => {
-
+  const { streamStatusData, setStreamStatusData } = useContext(StreamStatusContext);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setStreamStatusData({type: 'UPDATE_STREAM_URL', url: 'ws://localhost:80'})
+      navigate('/start')
+    }, 5000)
+  }, [])
   return (
     <div className='loading-page'>
       <div className='loading-page__content'>
