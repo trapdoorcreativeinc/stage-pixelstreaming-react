@@ -20,12 +20,12 @@ const LandingPage = () => {
           <Link to='/session' className='button action'>
             Start Session
           </Link>
-          <Link to='/start' className='button action'>
+          {/* <Link to='/start' className='button action'>
             Start a Multi User Session
           </Link>
           <Link to='/' className='button action disabled' aria-disabled>
             Join a Multi User Session
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

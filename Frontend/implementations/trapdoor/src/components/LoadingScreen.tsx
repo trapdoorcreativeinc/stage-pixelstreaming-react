@@ -9,19 +9,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Claire Metahuman wearing a dress in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/Claire_HalterDress_ModernBuildings_fullbody_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Claire_HalterDress_ModernBuildings_fullbody_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Claire_HalterDress_ModernBuildings_fullbody_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Claire_HalterDress_ModernBuildings_fullbody_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Claire_HalterDress_ModernBuildings_fullbody_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Claire_HalterDress_ModernBuildings_fullbody_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Claire_HalterDress_ModernBuildings_fullbody_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Claire_HalterDress_ModernBuildings_fullbody_4k.png',
         width: 3840,
       }
     ]
@@ -30,19 +30,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'North Face Backpack rendereed in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/NorthFace_BP_07_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/NorthFace_BP_07_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/NorthFace_BP_07_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/NorthFace_BP_07_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/NorthFace_BP_07_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/NorthFace_BP_07_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/NorthFace_BP_07_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/NorthFace_BP_07_4k.png',
         width: 3840,
       }
     ]
@@ -51,19 +51,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Close up of a boombox rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/CloseUpBoomBox_2_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/CloseUpBoomBox_2_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/CloseUpBoomBox_2_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/CloseUpBoomBox_2_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/CloseUpBoomBox_2_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/CloseUpBoomBox_2_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/CloseUpBoomBox_2_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/CloseUpBoomBox_2_4k.png',
         width: 3840,
       }
     ]
@@ -72,19 +72,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Delilah Metahuman wearing leggings on a tennis court in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/Delilah_leggings_TennisCourt_closeup_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Delilah_leggings_TennisCourt_closeup_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Delilah_leggings_TennisCourt_closeup_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Delilah_leggings_TennisCourt_closeup_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Delilah_leggings_TennisCourt_closeup_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Delilah_leggings_TennisCourt_closeup_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Delilah_leggings_TennisCourt_closeup_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Delilah_leggings_TennisCourt_closeup_4k.png',
         width: 3840,
       }
     ]
@@ -93,19 +93,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Motorcycle rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_5_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_5_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_5_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_5_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_5_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_5_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_5_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_5_4k.png',
         width: 3840,
       }
     ]
@@ -114,19 +114,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Roman Ruins scene rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/RomanRuins_scene_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/RomanRuins_scene_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/RomanRuins_scene_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/RomanRuins_scene_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/RomanRuins_scene_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/RomanRuins_scene_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/RomanRuins_scene_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/RomanRuins_scene_4k.png',
         width: 3840,
       }
     ]
@@ -135,19 +135,19 @@ const images: LazyLoadingImageProperties[] = [
     alt : 'Another Motorcycle rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_8_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_8_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_8_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_8_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_8_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_8_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/FullMotorcycle_8_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/FullMotorcycle_8_4k.png',
         width: 3840,
       }
     ]
@@ -156,19 +156,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Utah Canyon scene rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/UtahCanyon_scene_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/UtahCanyon_scene_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/UtahCanyon_scene_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/UtahCanyon_scene_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/UtahCanyon_scene_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/UtahCanyon_scene_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/UtahCanyon_scene_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/UtahCanyon_scene_4k.png',
         width: 3840,
       }
     ]
@@ -177,19 +177,19 @@ const images: LazyLoadingImageProperties[] = [
     alt: 'Knit Dress on a mannequin rendered in Stage',
     srcset: [
       {
-        src: require('../assets/images/loading-screen/optimized-images/Wallpaper_KnitDress_Quarry_720p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Wallpaper_KnitDress_Quarry_720p.png',
         width: 1280,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Wallpaper_KnitDress_Quarry_1080p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Wallpaper_KnitDress_Quarry_1080p.png',
         width: 1920,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Wallpaper_KnitDress_Quarry_1440p.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Wallpaper_KnitDress_Quarry_1440p.png',
         width: 2560,
       },
       {
-        src: require('../assets/images/loading-screen/optimized-images/Wallpaper_KnitDress_Quarry_4k.png'),
+        src: 'https://d3n407psm1vwxt.cloudfront.net/images/website/streaming/Wallpaper_KnitDress_Quarry_4k.png',
         width: 3840,
       }
     ]
