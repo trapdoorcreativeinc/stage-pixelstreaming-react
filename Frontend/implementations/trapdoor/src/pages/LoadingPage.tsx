@@ -14,7 +14,7 @@ const LoadingPage = () => {
     const getStreamStatus = (isFirst: boolean = false) => {
       const uid = userAuth.currentUser?.auth?.uid;
       if (uid) {
-        fetch(`https://test-stream.stage3d.app/streaming?uid=${uid}`,
+        fetch(`https://test-stream.stage3d.app/streaming/?uid=${uid}`,
           {
             method: 'POST',
             headers: {
