@@ -9,6 +9,11 @@ export const formatDate = (date: string) => {
   return day;
 }
 
+export const trimFileName = (fileName: string) => {
+  const splitName = fileName.split('/');
+  return splitName[splitName.length - 1] || splitName[splitName.length - 2];
+}
+
 export const uploadMultipleFiles = async (
   parentDirectory: string,
   userId: string,
@@ -118,4 +123,96 @@ export const readDirectory = async (parentDirectory: string, userId: string, pat
     return null;
   });
   return data;
+}
+
+
+export const downloadFile = async (parentDirectory: string, userId: string, pathSuffix: string, loadingCallback: Function) => {
+  loadingCallback(true);
+  const encodedPathSuffix = encodeURIComponent(pathSuffix);
+  await fetch(`/api/v1/aws/download/${parentDirectory}${userId}/${encodedPathSuffix}`)
+  .then((response) => response.json())
+  .then(async (json) => {
+    console.log("json: ", json);
+    if (json && json.url) {
+      console.log("response.url: ", json.url);
+      try {
+        // const a = document.createElement("a");
+        // a.href = json.url;
+        // a.download = trimFileName(pathSuffix);
+        // document.body.appendChild(a);
+        // a.click();
+        // a.parentNode.removeChild(a);
+        // window.URL.revokeObjectURL(json.url);
+        fetch(json.url)
+        .then((data) => data.blob())
+        .then((blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = trimFileName(pathSuffix);
+          document.body.appendChild(a);
+          a.click();
+          a.parentNode.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          loadingCallback(false);
+        })
+        .catch((error) => {
+          console.error("Error downloading file: ", error);
+          alert("Error downloading file. Please try again later. If the problem persists, please contact support.");
+          loadingCallback(false);
+        });
+      }
+      catch (error) {
+        console.error("Error downloading file: ", error);
+        alert("Error downloading file. Please try again later. If the problem persists, please contact support.");
+        loadingCallback(false);
+      }
+    }
+    else {
+      alert("Error downloading file. Please try again later. If the problem persists, please contact support.");
+      loadingCallback(false);
+    }
+  })
+}
+
+export const deleteFile = async (parentDirectory: string, userId: string, pathSuffix: string) => {
+  await fetch(`/api/v1/aws/delete-file/${parentDirectory}/${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "CSRF-Token": getCSRFTokenCookie(),
+    },
+    body: JSON.stringify({
+      path: pathSuffix,
+    }),
+  })
+    .then((data) => {
+      return data.json();
+    })
+    .catch((error) => {
+      console.error("Error deleting file: ", error);
+    });
+}
+
+export const deleteFolder = async (parentDirectory: string, userId: string, pathSuffix: string) => {
+  const directory = await readDirectory(parentDirectory, userId, pathSuffix);
+  // delete each file one by one
+  console.log("directory: ", directory);
+  try {
+    if (directory?.Contents?.length > 0) {
+      for (const file of directory?.Contents) {
+        deleteFile(parentDirectory, userId, file?.Key?.split(userId)[1]);
+      }
+    }
+    if (directory?.CommonPrefixes?.length > 0) {
+      for (const folder of directory?.CommonPrefixes) {
+        await deleteFolder(parentDirectory, userId, folder?.Prefix?.split(userId)[1]);
+      }
+    }
+  }
+  catch (error) {
+    console.error("Error deleting folder: ", error);
+    alert("Error deleting folder. Please try again later. If the problem persists, please contact support.");
+  }
 }

@@ -19,13 +19,15 @@ module.exports = merge(common, {
                 router: () => 'http://localhost:5001',
                 logLevel: 'debug'
             },
-        }
+        },
+    	static: {
+    		directory: path.join(__dirname, '../../../SignallingWebServer/Public'),
+    	},
     },
     loader: {
         loader: 'sass-loader',
         options: {
             sourceMap: true,
         }
-    },
-    watch: true
+    }
 });

@@ -66,6 +66,12 @@
     flex: 0 0 auto;
     justify-self: flex-end;
     margin-left: 1rem;
+    * {
+      cursor: pointer;
+      &:hover {
+        color: $secondary-light-color;
+      }
+    }
     .material-icons {
       font-size: 1.5em;
       vertical-align: text-bottom;

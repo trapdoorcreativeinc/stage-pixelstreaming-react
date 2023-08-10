@@ -1,6 +1,6 @@
 import React from "react";
 import { formatBytes } from "../../helpers/fileManagement";
-import { formatDate } from "../../helpers/api/fileManagement";
+import { formatDate, trimFileName } from "../../helpers/api/fileManagement";
 
 interface SingleFileProperties {
   name: string;
@@ -12,11 +12,6 @@ interface SingleFileProperties {
   onDelete?: () => void;
   onDownload?: () => void;
   openFolder?: () => void;
-}
-
-const trimFileName = (fileName: string) => {
-  const splitName = fileName.split('/');
-  return splitName[splitName.length - 1] || splitName[splitName.length - 2];
 }
 
 const SingleFile = ({
@@ -56,14 +51,14 @@ const SingleFile = ({
     <div className="single-file__right">
       <div className="single-file__actions">
         {deletable && (
-            <span className="material-icons"
-              onClick={onDelete}
-            >delete</span>
+          <span className="material-icons"
+            onClick={onDelete}
+          >delete</span>
         )}
-        {downloadable && (
-            <span className="material-icons"
-              onClick={onDownload}
-            >file_download</span>
+        {downloadable && type !== 'folder' && (
+          <span className="material-icons"
+            onClick={onDownload}
+          >file_download</span>
         )}
       </div>
     </div>

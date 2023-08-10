@@ -69,9 +69,4 @@ module.exports = {
     experiments: {
       futureDefaults: true
     },
-	devServer: {
-    	static: {
-    		directory: path.join(__dirname, '../../../SignallingWebServer/Public'),
-    	},
-    },
 }

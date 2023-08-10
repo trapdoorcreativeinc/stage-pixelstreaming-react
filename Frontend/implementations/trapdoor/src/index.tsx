@@ -17,7 +17,7 @@ document.body.onload = function () {
       <SideLoadingProvider>
         <UserAuthContextProvider>
           <StreamStatusProvider>
-            <BrowserRouter basename='/stream'>
+            <BrowserRouter basename='/streamv2'>
               <MainLayout>
                 <Switch />
               </MainLayout>
